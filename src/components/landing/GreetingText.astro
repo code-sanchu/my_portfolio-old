@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="first-line">
+    <div class="bracket bracket-1">[</div>
+    <div class="first-line-digit">C</div>
+    <div class="first-line-digit">u</div>
+    <div class="first-line-digit">r</div>
+    <div class="first-line-digit">a</div>
+    <div class="first-line-digit">t</div>
+    <div class="first-line-digit">e</div>
+    <div class="first-line-digit">d</div>
+    <div class="first-line-digit new-word">s</div>
+    <div class="first-line-digit">i</div>
+    <div class="first-line-digit">t</div>
+    <div class="first-line-digit">e</div>
+    <div class="first-line-digit">s</div>
+    <div class="bracket bracket-2">]</div>
+  </div>
+  <div class="second-line">
+    <div class="second-line-digit">V</div>
+    <div class="second-line-digit">i</div>
+    <div class="second-line-digit">r</div>
+    <div class="second-line-digit">t</div>
+    <div class="second-line-digit">u</div>
+    <div class="second-line-digit">a</div>
+    <div class="second-line-digit">l</div>
+    <div class="second-line-digit">W</div>
+    <div class="second-line-digit">o</div>
+    <div class="second-line-digit">r</div>
+    <div class="second-line-digit">k</div>
+    <div class="second-line-digit">s</div>
+  </div>
+</div>
+
+<style>
+  .container {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .first-line {
+    /* font-size: xx-large; */
+    display: flex;
+    gap: 1px;
+  }
+  .first-line-digit {
+    opacity: 0;
+  }
+  .new-word {
+    margin-left: 10px;
+  }
+  .bracket {
+    transform: translateY(-10px);
+  }
+  .bracket-1 {
+    margin-right: 4px;
+  }
+  .bracket-2 {
+    margin-left: 4px;
+  }
+  .second-line {
+    font-size: xx-large;
+    letter-spacing: 5px;
+    display: flex;
+    gap: 1px;
+    opacity: 0;
+    transform-origin: center center 0;
+  }
+</style>
+
+<script>
+  import anime from "animejs/lib/anime.es";
+
+  anime({
+    targets: ".first-line-digit",
+    translateY: -10,
+    opacity: 1,
+    delay: anime.stagger(60),
+    easing: "easeInCubic",
+    duration: 400,
+  });
+
+  anime({
+    delay: 500,
+    targets: ".second-line",
+    opacity: 1,
+    easing: "easeInCubic",
+    duration: 600,
+    translateY: -10,
+  });
+</script>
