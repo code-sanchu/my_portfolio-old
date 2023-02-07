@@ -2,37 +2,66 @@
 import { Image } from "@astrojs/image/components";
 
 import Layout from "~layouts/Layout.astro";
-
-import frontend1 from "~images/work/asatic/frontend-1.png";
 import HorizontalScrollContainer from "~components/HorizontalScrollContainer.astro";
+
+import cmsToSite from "~images/work/asatic/Asatic-CMS-to-Site.jpg";
+// import cms1 from "~images/work/asatic/cms-dragging-landing-component.png";
+// TODO: add e.g. custom buiilt components (article editor); user feedback, status of documents.
+// ...user friendly default for ease of use (text + image summary); ease of use components (auto-fill button on landing)
 ---
 
 <Layout pageTitle="Asatic">
   <main>
     <div>
-      <div class="text-section header">
+      <div class="header">
         <h1>ASATiC</h1>
-        <p>Design and build of website and CMS.</p>
+        <div class="second-line">
+          <p>Design and build of website and CMS.</p>
+          <a href="https://asatic-frontend.vercel.app/"
+            >visit site ↗ <span>[site being populated]</span></a
+          >
+        </div>
       </div>
       <div class="first-image-section">
         <HorizontalScrollContainer>
           <div class="images-container">
             <div class="image-1-container">
-              <Image src={frontend1} fit="contain" alt="" format="avif" />
+              <Image src={cmsToSite} fit="contain" alt="" format="avif" />
             </div>
-            <div class="aa"></div>
           </div>
         </HorizontalScrollContainer>
+        <div class="caption">
+          From left to right: the custom CMS resembles the site as closely as
+          possible. It's functionality includes draggable, resizable components.
+        </div>
+      </div>
+      <div class="overview">
+        <h2>Overview</h2>
+        <p class="text-section">
+          Tasked with building a multilingual online journal and political
+          oriented community forum, I was given free range over the design and
+          implentation of this site. The site itself has a clean, classical
+          design in line with the serious social and political discourse it
+          hosts. The CMS is packed full of functionality whilst remaining
+          decluttered and resembling the actual site as closely as possible.
+        </p>
       </div>
     </div>
   </main>
 </Layout>
 
 <style>
-  .aa {
-    width: 4000px;
-    height: 400px;
-    background-color: red;
+  .overview {
+    margin-top: 1.5rem;
+    font-weight: 400;
+  }
+  .overview h2 {
+    font-weight: 400;
+    font-size: larger;
+    text-transform: uppercase;
+  }
+  .overview p {
+    margin-top: 1rem;
   }
   main {
     font-family: "KR", sans-serif;
@@ -43,23 +72,39 @@ import HorizontalScrollContainer from "~components/HorizontalScrollContainer.ast
     margin-top: 20vh;
     width: 80vw;
     max-width: 1200px;
-    /* display: flex; */
-    /* justify-content: center; */
   }
   .text-section {
     max-width: 768px;
     width: 768px;
+    line-height: 1.4rem;
   }
   .header h1 {
     font-weight: 400;
     font-size: 60px;
     letter-spacing: 2px;
   }
-  .header p {
+  .header .second-line {
     margin-top: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .header .second-line a {
+    position: relative;
+  }
+  .header .second-line a span {
+    position: absolute;
+    white-space: nowrap;
+    right: 0;
+    color: lightgray;
+    transform: translateY(calc(100% + 3px));
   }
   .first-image-section {
     margin-top: 3rem;
+  }
+  .first-image-section .caption {
+    margin-top: 0.5rem;
+    color: #43433eff;
   }
   .images-container {
     position: relative;
@@ -71,7 +116,7 @@ import HorizontalScrollContainer from "~components/HorizontalScrollContainer.ast
   }
   .first-image-section .image-1-container {
     position: relative;
-    width: 400px;
+    width: 1000px;
   }
   .first-image-section img {
     /* position: absolute; */
