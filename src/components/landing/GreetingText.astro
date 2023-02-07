@@ -8,6 +8,13 @@
     <div class="first-line-digit">t</div>
     <div class="first-line-digit">e</div>
     <div class="first-line-digit">d</div>
+    <div class="first-line-digit">,</div>
+    <div class="first-line-digit new-word">s</div>
+    <div class="first-line-digit">n</div>
+    <div class="first-line-digit">a</div>
+    <div class="first-line-digit">p</div>
+    <div class="first-line-digit">p</div>
+    <div class="first-line-digit">y</div>
     <div class="first-line-digit new-word">s</div>
     <div class="first-line-digit">i</div>
     <div class="first-line-digit">t</div>
@@ -15,19 +22,23 @@
     <div class="first-line-digit">s</div>
     <div class="bracket bracket-2">]</div>
   </div>
-  <div class="second-line">
-    <div class="second-line-digit">V</div>
-    <div class="second-line-digit">i</div>
-    <div class="second-line-digit">r</div>
-    <div class="second-line-digit">t</div>
-    <div class="second-line-digit">u</div>
-    <div class="second-line-digit">a</div>
-    <div class="second-line-digit">l</div>
-    <div class="second-line-digit">W</div>
-    <div class="second-line-digit">o</div>
-    <div class="second-line-digit">r</div>
-    <div class="second-line-digit">k</div>
-    <div class="second-line-digit">s</div>
+  <div class="site-name-container">
+    <div class="site-name-line second-line">
+      <div>V</div>
+      <div>&Icirc;</div>
+      <div>r</div>
+      <div>t</div>
+      <div>u</div>
+      <div>&aacute;</div>
+      <div>l</div>
+    </div>
+    <div class="site-name-line third-line">
+      <div>W</div>
+      <div>&odblac;</div>
+      <div>r</div>
+      <div>k</div>
+      <div>s</div>
+    </div>
   </div>
 </div>
 
@@ -40,34 +51,48 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    font-family: "VG", sans-serif;
   }
   .first-line {
-    /* font-size: xx-large; */
     display: flex;
     gap: 1px;
+    /* color: rgb(170, 172, 160, 255); */
+    color: rgba(63, 64, 53, 255);
   }
   .first-line-digit {
     opacity: 0;
   }
   .new-word {
-    margin-left: 10px;
+    margin-left: 7px;
   }
   .bracket {
     transform: translateY(-10px);
   }
   .bracket-1 {
-    margin-right: 4px;
+    margin-right: 2px;
   }
   .bracket-2 {
-    margin-left: 4px;
+    margin-left: 2px;
   }
-  .second-line {
-    font-size: xx-large;
+  .site-name-container {
+    font-variant: small-caps;
+    font-size: 70px;
     letter-spacing: 5px;
+    /* color: #0e1c33; */
+    color: rgba(44, 36, 33, 255);
+  }
+  .site-name-line {
     display: flex;
     gap: 1px;
     opacity: 0;
     transform-origin: center center 0;
+  }
+  .second-line {
+  }
+  .third-line {
+  }
+  .a {
+    font-size: 100px;
   }
 </style>
 
@@ -78,14 +103,22 @@
     targets: ".first-line-digit",
     translateY: -10,
     opacity: 1,
-    delay: anime.stagger(60),
+    delay: anime.stagger(40),
     easing: "easeInCubic",
     duration: 400,
   });
 
   anime({
-    delay: 500,
+    delay: 300,
     targets: ".second-line",
+    opacity: 1,
+    easing: "easeInCubic",
+    duration: 600,
+    translateY: -10,
+  });
+  anime({
+    delay: 400,
+    targets: ".third-line",
     opacity: 1,
     easing: "easeInCubic",
     duration: 600,
