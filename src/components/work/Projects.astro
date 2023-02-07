@@ -1,0 +1,83 @@
+---
+// appa, alesh, amy, amma, birch, other
+import { Image } from "@astrojs/image/components";
+
+import asaticImage from "~images/work/slider/asatic.jpg";
+
+const projects = [{ title: " Asatic", image: asaticImage }];
+---
+
+<div class="projects-container">
+  <div class="project-container">
+    <div class="image-container">
+      <Image src={asaticImage} alt="" format="avif" />
+    </div>
+    <div class="text-container">
+      <p class="project-type-text">
+        <span>website & cms</span>
+        <span class="line"></span>
+      </p>
+      <h2>Asatic</h2>
+      <p class="view-project-text">view project</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .projects-container {
+    margin-top: 20vh;
+    margin-left: 20%;
+  }
+  .project-container {
+    display: flex;
+  }
+  .image-container {
+    position: relative;
+    width: 350px;
+    height: 500px;
+  }
+  .image-container img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  .text-container {
+    position: relative;
+  }
+  .text-container h2 {
+    font-size: 70px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    transform: translateX(-60px) translateY(220px);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-image: linear-gradient(
+      to right,
+      white 0%,
+      white 60px,
+      black 60px,
+      black 100%
+    );
+  }
+  .text-container .project-type-text {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    transform: translateX(40px) translateY(170px);
+  }
+  .text-container .line {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background-color: black;
+  }
+  .text-container .view-project-text {
+    position: absolute;
+    bottom: 0;
+    left: 250px;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+</style>

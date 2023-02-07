@@ -1,0 +1,83 @@
+---
+import { Image } from "@astrojs/image/components";
+
+import Layout from "~layouts/Layout.astro";
+
+import frontend1 from "~images/work/asatic/frontend-1.png";
+import HorizontalScrollContainer from "~components/HorizontalScrollContainer.astro";
+---
+
+<Layout pageTitle="Asatic">
+  <main>
+    <div>
+      <div class="text-section header">
+        <h1>ASATiC</h1>
+        <p>Design and build of website and CMS.</p>
+      </div>
+      <div class="first-image-section">
+        <HorizontalScrollContainer>
+          <div class="images-container">
+            <div class="image-1-container">
+              <Image src={frontend1} fit="contain" alt="" format="avif" />
+            </div>
+            <div class="aa"></div>
+          </div>
+        </HorizontalScrollContainer>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .aa {
+    width: 4000px;
+    height: 400px;
+    background-color: red;
+  }
+  main {
+    font-family: "KR", sans-serif;
+    display: flex;
+    justify-content: center;
+  }
+  main > div {
+    margin-top: 20vh;
+    width: 80vw;
+    max-width: 1200px;
+    /* display: flex; */
+    /* justify-content: center; */
+  }
+  .text-section {
+    max-width: 768px;
+    width: 768px;
+  }
+  .header h1 {
+    font-weight: 400;
+    font-size: 60px;
+    letter-spacing: 2px;
+  }
+  .header p {
+    margin-top: 0.5rem;
+  }
+  .first-image-section {
+    margin-top: 3rem;
+  }
+  .images-container {
+    position: relative;
+    display: inline-flex;
+    align-items: flex-start;
+    justify-content: stretch;
+    gap: 1vw;
+    height: 100%;
+  }
+  .first-image-section .image-1-container {
+    position: relative;
+    width: 400px;
+  }
+  .first-image-section img {
+    /* position: absolute; */
+    /* width: 100%; */
+    display: inline-block;
+    width: 100%;
+    height: auto;
+  }
+</style>
