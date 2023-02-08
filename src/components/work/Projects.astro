@@ -32,14 +32,13 @@ const projects = [
 ---
 
 <div class="w-screen h-screen grid place-items-center font-display-secondary">
-  <div>
+  <div id="projects-container" data-num-projects={projects.length}>
     {
       projects.map((project, i) => (
         <div
           id={`project${i}`}
-          class={`flex overflow-hidden  ${
-            i === 0 ? "opacity-100" : "hidden opacity-0"
-          }`}
+          class={`flex overflow-hidden  ${i === 0 ? "" : "hidden"}`}
+          data-selector="project"
         >
           <div class="relative w-[350px] h-[500px] translate-y-full">
             <Image id={`image${i}`} src={project.image} alt="" format="avif" />
@@ -74,9 +73,9 @@ const projects = [
 <script>
   import anime from "animejs/lib/anime.es";
 
-  function animateFirstProjectOnPageLoad() {
+  function animateImageIn({ imageIndex }: { imageIndex: number }) {
     const image1 = anime.timeline({
-      targets: "#image0",
+      targets: `#image${imageIndex}`,
       easing: "spring(6, 70, 80, 3)",
     });
     image1.add({
@@ -86,12 +85,24 @@ const projects = [
     });
   }
 
+  function animateFirstProjectOnPageLoad() {
+    animateImageIn({ imageIndex: 0 });
+  }
+
   function main() {
     animateFirstProjectOnPageLoad();
 
-    let currentProjectIndex = 0;
+    const projectsContainer = document.getElementById("projects-container")!;
+    const maxIndex = Number(projectsContainer.dataset.numProjects) - 1;
 
-    const currentImageId = `#image${currentProjectIndex}`;
+    let currentProjectIndex = 0;
+    let nextProjectIndex =
+      currentProjectIndex + 1 <= maxIndex ? currentProjectIndex + 1 : 0;
+
+    const currentImageId = `image${currentProjectIndex}`;
+    // const nextImageId = `#image${currentProjectIndex}`;
+    const currentProjectId = `project${currentProjectIndex}`;
+    const nextProjectId = `project${nextProjectIndex}`;
 
     const prevButton = document.getElementById("prev");
     const nextButton = document.getElementById("next");
@@ -103,14 +114,27 @@ const projects = [
     }
     if (nextButton) {
       nextButton.addEventListener("click", () => {
-        const image = anime.timeline({
-          targets: `${currentImageId}`,
+        const currentImage = anime.timeline({
+          targets: `#${currentImageId}`,
           easing: "spring(6, 70, 80, 3)",
         });
-        image.add({
+        currentImage.add({
           translateY: "-200%",
           opacity: 0,
         });
+        const currentProject = document.getElementById(currentProjectId)!;
+        currentProject.style.display = "none";
+        currentImage.add({
+          translateY: "0%",
+          opacity: 0,
+        });
+        console.log("nextProjectId:", nextProjectId);
+
+        const nextProject = document.getElementById(nextProjectId)!;
+        console.log("nextProject:", nextProject);
+        nextProject.style.display = "block";
+
+        animateImageIn({ imageIndex: nextProjectIndex });
       });
     }
 
