@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         "work-title":
-          "linear-gradient(to right, white 0%, white 60px, black 60px, black 100%)",
+          "linear-gradient(to right, white 0%, white 80px, black 80px, black 100%)",
       },
       spacing: {
         xxxs: ".1rem",

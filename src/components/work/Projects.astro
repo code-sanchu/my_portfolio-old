@@ -7,6 +7,7 @@ import amyImage from "~images/work/slider/amy.png";
 
 const projects = [
   {
+    id: "asatic",
     title: " Asatic",
     image: asaticImage,
     description: "website & cms",
@@ -15,7 +16,8 @@ const projects = [
       url: "",
     },
   },
-  /*   {
+  {
+    id: "amyj",
     title: " Amy Rodriguez Jewellery",
     image: amyImage,
     description: "website",
@@ -23,25 +25,37 @@ const projects = [
       text: "visit site",
       url: "",
     },
-  }, */
+  },
 ];
 // could change font for each project according to acutal site
 // change project opacity 0 to display none
 ---
 
 <div class="w-screen h-screen grid place-items-center font-display-secondary">
-  <div class="">
+  <div>
     {
       projects.map((project, i) => (
         <div
+          id={`project${i}`}
           class={`flex overflow-hidden  ${
-            i === 0 ? "opacity-100" : "opacity-0"
+            i === 0 ? "opacity-100" : "hidden opacity-0"
           }`}
         >
-          <div class="relative w-[350px] h-[500px]">
-            <Image src={project.image} alt="" format="avif" />
+          <div class="relative w-[350px] h-[500px] translate-y-full">
+            <Image id={`image${i}`} src={project.image} alt="" format="avif" />
           </div>
-          <div class="flex flex-col justify-end">
+        </div>
+      ))
+    }
+    <div class="flex justify-between px-md font-display-primary mt-sm">
+      <button id="prev" type="button">&lt;</button>
+      <button id="next" type="button">&gt;</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* <div class="flex flex-col justify-end">
             <div class="">
               <p class="mb-xl ml-xl flex items-center gap-sm">
                 <span>{project.description}</span>
@@ -49,108 +63,85 @@ const projects = [
               </p>
             </div>
             <div class="">
-              <h2 class="text-8xl -translate-x-[60px] bg-work-title bg-clip-text text-transparent mb-3xl">
+              <h2 class="text-8xl -translate-x-[80px] bg-work-title bg-clip-text text-transparent mb-3xl">
                 {project.title}
               </h2>
             </div>
             <p class="pl-2xl">{project.link.text}</p>
-          </div>
-        </div>
-      ))
-    }
-  </div>
-</div>
-
-<style>
-  .title-container {
-    transform: translateY(100%);
-  }
-  .text-container h2 {
-    font-size: 70px;
-    font-weight: 400;
-    letter-spacing: 2px;
-    transform: translateX(-60px) translateY(220px);
-    color: transparent;
-    -webkit-background-clip: text;
-    background-image: linear-gradient(
-      to right,
-      white 0%,
-      white 60px,
-      black 60px,
-      black 100%
-    );
-    opacity: 0;
-  }
-  .description-container {
-    transform: translateX(40px) translateY(calc(100% + 170px));
-  }
-  .text-container .project-type-text {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 20px;
-    letter-spacing: 1px;
-    opacity: 0;
-  }
-  .text-container .line {
-    display: block;
-    width: 18px;
-    height: 1.5px;
-    background-color: black;
-  }
-  .text-container .view-project-text {
-    position: absolute;
-    bottom: 0;
-    left: 250px;
-    white-space: nowrap;
-    cursor: pointer;
-    opacity: 0;
-  }
-</style>
-<style>
-  #image1 {
-    /* transform: translateY(100%); */
-  }
-</style>
+          </div> */
+</script>
 
 <script>
   import anime from "animejs/lib/anime.es";
 
-  const project1 = anime.timeline({
-    targets: "#project1",
-    easing: "cubicBezier(.5, .05, .1, .3)",
-  });
-  project1.add({
-    opacity: 1,
-    duration: 0,
-  });
+  function animateFirstProjectOnPageLoad() {
+    const image1 = anime.timeline({
+      targets: "#image0",
+      easing: "spring(6, 70, 80, 3)",
+    });
+    image1.add({
+      delay: 400,
+      translateY: "-100%",
+      opacity: 1,
+    });
+  }
 
-  const image1 = anime.timeline({
-    targets: "#image1",
-    easing: "spring(6, 70, 80, 3)",
-  });
-  image1.add({
-    delay: 400,
-    translateY: "-100%",
-    opacity: 1,
-  });
+  function main() {
+    animateFirstProjectOnPageLoad();
 
-  const description1 = anime.timeline({
-    targets: "#description1",
-    easing: "spring(6, 70, 80, 3)",
-  });
-  description1.add({
-    translateY: "-100%",
-    opacity: 1,
-  });
+    let currentProjectIndex = 0;
 
-  const title1 = anime.timeline({
-    targets: "#title1",
-    easing: "spring(6, 70, 80, 3)",
-  });
-  title1.add({
-    translateX: -60,
-    translateY: "-100%",
-    opacity: 1,
-  });
+    const currentImageId = `#image${currentProjectIndex}`;
+
+    const prevButton = document.getElementById("prev");
+    const nextButton = document.getElementById("next");
+
+    if (prevButton) {
+      prevButton.addEventListener("click", () => {
+        console.log("Clicked");
+      });
+    }
+    if (nextButton) {
+      nextButton.addEventListener("click", () => {
+        const image = anime.timeline({
+          targets: `${currentImageId}`,
+          easing: "spring(6, 70, 80, 3)",
+        });
+        image.add({
+          translateY: "-200%",
+          opacity: 0,
+        });
+      });
+    }
+
+    /*     const project1 = anime.timeline({
+      targets: "#project1",
+      easing: "cubicBezier(.5, .05, .1, .3)",
+    });
+    project1.add({
+      opacity: 1,
+      duration: 0,
+    }); */
+
+    /*     const description1 = anime.timeline({
+      targets: "#description1",
+      easing: "spring(6, 70, 80, 3)",
+    });
+    description1.add({
+      translateY: "-100%",
+      opacity: 1,
+    });
+
+    const title1 = anime.timeline({
+      targets: "#title1",
+      easing: "spring(6, 70, 80, 3)",
+    });
+    title1.add({
+      translateX: -60,
+      translateY: "-100%",
+      opacity: 1,
+    }); */
+  }
+
+  main();
 </script>
