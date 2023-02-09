@@ -5,6 +5,10 @@ module.exports = {
     fontFamily: {
       "display-primary": ["VG", "sans-serif"],
       "display-secondary": ["FN", "sans-serif"],
+      amy: ["EB", "serif"],
+      "asatic-eb": ["NM_EB", "sans-serif"],
+      "asatic-b": ["NM_B", "sans-serif"],
+      "asatic-r": ["NM_R", "sans-serif"],
     },
     extend: {
       backgroundImage: {

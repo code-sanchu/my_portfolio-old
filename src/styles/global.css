@@ -26,13 +26,40 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "EB";
+  src: url("/fonts/EB.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NM_EB";
+  src: url("/fonts/NM_EB.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NM_B";
+  src: url("/fonts/NM_B.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NM_R";
+  src: url("/fonts/NM_R.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 * {
   box-sizing: border-box;
   margin: 0;
   -webkit-tap-highlight-color: transparent;
 }
-
 
 a,
 a:visited {
