@@ -1,5 +1,4 @@
 ---
-// alesh, appa, amy, amma, birch, other
 import { Image } from "@astrojs/image/components";
 
 import asaticImage from "~images/work/slider/asatic.jpg";
@@ -25,7 +24,7 @@ const projects: {
     id: "birch",
     title: { type: "text", text: "Birch Collective" },
     image: birchImage,
-    description: "website",
+    description: "website & cms",
     link: {
       text: "visit site",
       url: "",
@@ -72,8 +71,7 @@ const projects: {
     },
   },
 ];
-// could change font for each project according to acutal site
-// change project opacity 0 to display none
+// TODO: bug when scroll back - multiyle projects showing
 ---
 
 <div class="w-screen h-screen grid place-items-center font-display-secondary">
