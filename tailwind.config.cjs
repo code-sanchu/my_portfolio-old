@@ -9,6 +9,11 @@ module.exports = {
       "asatic-eb": ["NM_EB", "sans-serif"],
       "asatic-b": ["NM_B", "sans-serif"],
       "asatic-r": ["NM_R", "sans-serif"],
+      alesh: ["IBMMono", "monospace"],
+      "alesh-b": ["IBMMono_B", "monospace"],
+      birch: ["Amatic-r", "cursive"],
+      "birch-b": ["Amatic-b", "cursive"],
+      piros: ["acumin-pro", "sans-serif"],
     },
     extend: {
       backgroundImage: {

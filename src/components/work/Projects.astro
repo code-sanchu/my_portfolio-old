@@ -5,6 +5,9 @@ import { Image } from "@astrojs/image/components";
 import asaticImage from "~images/work/slider/asatic.jpg";
 import amyImage from "~images/work/slider/amy.png";
 import amyLogo from "~images/work/amy/logo.png";
+import aleshImage from "~images/work/slider/alesh.jpg";
+import pirosImage from "~images/work/slider/piros.jpg";
+import birchImage from "~images/work/slider/birch.jpg";
 
 const projects: {
   id: string;
@@ -19,6 +22,26 @@ const projects: {
   description: string;
 }[] = [
   {
+    id: "birch",
+    title: { type: "text", text: "Birch Collective" },
+    image: birchImage,
+    description: "website",
+    link: {
+      text: "visit site",
+      url: "",
+    },
+  },
+  {
+    id: "amy",
+    title: { type: "image", url: amyLogo },
+    image: amyImage,
+    description: "website",
+    link: {
+      text: "visit site",
+      url: "",
+    },
+  },
+  {
     id: "asatic",
     title: { type: "text", text: "ASATiC" },
     image: asaticImage,
@@ -29,10 +52,19 @@ const projects: {
     },
   },
   {
-    id: "amy",
-    title: { type: "image", url: amyLogo },
-    // title: { type: "image", text: ["Amy Rodriguez", "Jewellery"] },
-    image: amyImage,
+    id: "alesh",
+    title: { type: "text", text: ["Alesh", "Compton"] },
+    image: aleshImage,
+    description: "website",
+    link: {
+      text: "visit site",
+      url: "",
+    },
+  },
+  {
+    id: "piros",
+    title: { type: "text", text: ["Piros", "Photography"] },
+    image: pirosImage,
     description: "website",
     link: {
       text: "visit site",
@@ -65,6 +97,12 @@ const projects: {
                       ? "font-amy"
                       : project.id === "asatic"
                       ? "font-asatic-r"
+                      : project.id === "alesh"
+                      ? "font-alesh"
+                      : project.id === "birch"
+                      ? "font-birch tracking-wide text-xl"
+                      : project.id === "piros"
+                      ? "font-piros"
                       : ""
                   }`}
                 >
@@ -79,7 +117,15 @@ const projects: {
                   <h2
                     id={`title${i}`}
                     class={`text-7xl bg-work-title bg-clip-text text-transparent mb-3xl opacity-0 flex flex-col ${
-                      project.id === "asatic" && "font-asatic-b"
+                      project.id === "asatic"
+                        ? "font-asatic-b"
+                        : project.id === "alesh"
+                        ? "font-alesh-b tracking-wide"
+                        : project.id === "birch"
+                        ? "font-birch-b"
+                        : project.id === "piros"
+                        ? "font-piros font-bold"
+                        : ""
                     }`}
                   >
                     {typeof project.title.text === "string"
@@ -103,6 +149,12 @@ const projects: {
                     ? "font-amy"
                     : project.id === "asatic"
                     ? "font-asatic-r"
+                    : project.id === "alesh"
+                    ? "font-alesh"
+                    : project.id === "birch"
+                    ? "font-birch text-lg"
+                    : project.id === "piros"
+                    ? "font-piros"
                     : ""
                 }`}
               >
