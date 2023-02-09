@@ -56,7 +56,7 @@ const projects: {
             <Image id={`image${i}`} src={project.image} alt="" format="avif" />
           </div>
           <div class="flex flex-col justify-end">
-            <div class="overflow-y-hidden mb-xl ml-xl">
+            <div class="mb-xl ml-xl">
               <div class="translate-y-full">
                 <p
                   id={`description${i}`}
@@ -73,7 +73,7 @@ const projects: {
                 </p>
               </div>
             </div>
-            <div class="overflow-y-hidden -translate-x-[80px]">
+            <div class="-translate-x-[80px]">
               <div class="translate-y-full">
                 {project.title.type === "text" ? (
                   <h2
@@ -125,7 +125,7 @@ const projects: {
 <script>
   import anime from "animejs/lib/anime.es";
 
-  import { calcNextIndex } from "~helpers/index";
+  import { calcNextIndex, calcPrevIndex } from "~helpers/index";
 
   function animateProjectIn({ index }: { index: number }) {
     const description = anime.timeline({
@@ -229,28 +229,39 @@ const projects: {
 
     let currentIndex = 0;
     let nextIndex = 1;
+    let prevIndex = maxIndex;
 
     const prevButton = document.getElementById("prev");
     const nextButton = document.getElementById("next");
 
     if (prevButton) {
       prevButton.addEventListener("click", () => {
-        console.log("Clicked");
+        animateProjectOut({ index: currentIndex });
+
+        setTimeout(() => {
+          const currentProjectId = `project${currentIndex}`;
+          const prevProjectId = `project${prevIndex}`;
+          const currentProject = document.getElementById(currentProjectId)!;
+          currentProject.style.display = "none";
+          const prevProject = document.getElementById(prevProjectId)!;
+          prevProject.style.display = "flex";
+        }, 800);
+
+        setTimeout(() => {
+          animateProjectIn({ index: prevIndex });
+          currentIndex = nextIndex;
+          nextIndex = calcNextIndex({ currentIndex, maxIndex });
+          prevIndex = calcPrevIndex({ currentIndex, maxIndex });
+        }, 850);
       });
     }
     if (nextButton) {
       nextButton.addEventListener("click", () => {
-        console.log("currentIndex:", currentIndex);
-        console.log("nextIndex:", nextIndex);
-
-        // const currentImageId = `image${currentIndex}`;
-        const currentProjectId = `project${currentIndex}`;
-        const nextProjectId = `project${nextIndex}`;
-
-        // · image out
         animateProjectOut({ index: currentIndex });
 
         setTimeout(() => {
+          const currentProjectId = `project${currentIndex}`;
+          const nextProjectId = `project${nextIndex}`;
           const currentProject = document.getElementById(currentProjectId)!;
           currentProject.style.display = "none";
           const nextProject = document.getElementById(nextProjectId)!;
@@ -261,6 +272,7 @@ const projects: {
           animateProjectIn({ index: nextIndex });
           currentIndex = nextIndex;
           nextIndex = calcNextIndex({ currentIndex, maxIndex });
+          prevIndex = calcPrevIndex({ currentIndex, maxIndex });
         }, 850);
       });
     }
