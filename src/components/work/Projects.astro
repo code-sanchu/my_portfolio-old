@@ -80,8 +80,12 @@ const projects: {
 ---
 
 <div class="w-screen h-screen grid place-items-center font-display-secondary">
-  <div class="flex justify-between items-center w-[80vw]">
-    <div id="projects-container" data-num-projects={projects.length}>
+  <div>
+    <div
+      class="flex justify-between items-center w-[80vw]"
+      id="projects-container"
+      data-num-projects={projects.length}
+    >
       {
         projects.map((project, i) => (
           <div
@@ -133,7 +137,7 @@ const projects: {
                           : project.id === "birch"
                           ? "font-birch-b"
                           : project.id === "piros"
-                          ? "font-piros font-bold"
+                          ? "font-piros"
                           : ""
                       }`}
                     >
@@ -174,23 +178,23 @@ const projects: {
           </div>
         ))
       }
-      <div class="flex justify-between px-md font-display-primary mt-sm">
-        <button id="prev" type="button">&lt;</button>
-        <button id="next" type="button">&gt;</button>
+      <div class="flex flex-col items-center gap-sm">
+        <div>
+          0<span class="inline-block" id="pagination-project-num">1</span>.
+        </div>
+        <div class="relative h-[200px] w-[1.5px] bg-gray-300">
+          <div
+            id="pagination-project-line"
+            class="h-[40px] w-[1.5px] bg-black absolute"
+          >
+          </div>
+        </div>
+        <div>05.</div>
       </div>
     </div>
-    <div class="flex flex-col items-center gap-sm">
-      <div>
-        0<span class="inline-block" id="pagination-project-num">1</span>.
-      </div>
-      <div class="relative h-[200px] w-[1.5px] bg-gray-300">
-        <div
-          id="pagination-project-line"
-          class="h-[40px] w-[1.5px] bg-black absolute"
-        >
-        </div>
-      </div>
-      <div>05.</div>
+    <div class="flex justify-between px-md font-display-primary mt-md">
+      <button id="prev" type="button">&lt;</button>
+      <button id="next" type="button">&gt;</button>
     </div>
   </div>
 </div>
@@ -243,7 +247,7 @@ const projects: {
     });
   }
 
-  function animateProjectOut({ index }: { index: number }) {
+  function animateProjectElementsOut({ index }: { index: number }) {
     const description = anime.timeline({
       targets: `#description${index}`,
       easing: "spring(6, 70, 80, 4)",
@@ -296,87 +300,122 @@ const projects: {
     });
   }
 
+  function animatePagination({
+    currentIndex,
+    nextIndex,
+    maxIndex,
+  }: {
+    currentIndex: number;
+    nextIndex: number;
+    maxIndex: number;
+  }) {
+    anime({
+      targets: "#pagination-project-num",
+      innerText: [currentIndex + 1, nextIndex + 1],
+      round: 1,
+      easing: "easeInOutExpo",
+    });
+
+    anime({
+      targets: "#pagination-project-line",
+      height: (200 / (maxIndex + 1)) * (nextIndex + 1),
+      easing: "easeInOutExpo",
+    });
+  }
+
+  function handleProjectContainerDisplay({
+    currentIndex,
+    nextIndex,
+  }: {
+    currentIndex: number;
+    nextIndex: number;
+  }) {
+    const currentProjectId = `project${currentIndex}`;
+    const nextProjectId = `project${nextIndex}`;
+    const currentProject = document.getElementById(currentProjectId)!;
+    currentProject.style.display = "none";
+    const nextProject = document.getElementById(nextProjectId)!;
+    nextProject.style.display = "flex";
+  }
+
+  function getMaxIndex() {
+    const projectsContainer = document.getElementById("projects-container")!;
+    const maxIndex = Number(projectsContainer.dataset.numProjects) - 1;
+
+    return maxIndex;
+  }
+
   function main() {
     animateProjectIn({ index: 0 });
 
-    const projectsContainer = document.getElementById("projects-container")!;
-    const maxIndex = Number(projectsContainer.dataset.numProjects) - 1;
+    const maxIndex = getMaxIndex();
 
     let currentIndex = 0;
     let nextIndex = 1;
     let prevIndex = maxIndex;
 
+    function updateIndexState({ direction }: { direction: "prev" | "next" }) {
+      currentIndex = direction === "prev" ? prevIndex : nextIndex;
+      nextIndex = calcNextIndex({ currentIndex, maxIndex });
+      prevIndex = calcPrevIndex({ currentIndex, maxIndex });
+    }
+
+    function showPrevProject() {
+      animateProjectElementsOut({ index: currentIndex });
+
+      animatePagination({
+        currentIndex,
+        maxIndex,
+        nextIndex: prevIndex,
+      });
+
+      setTimeout(() => {
+        handleProjectContainerDisplay({ currentIndex, nextIndex: prevIndex });
+      }, 800);
+
+      setTimeout(() => {
+        animateProjectIn({ index: prevIndex });
+
+        updateIndexState({ direction: "prev" });
+      }, 850);
+    }
+
+    function showNextProject() {
+      animateProjectElementsOut({ index: currentIndex });
+
+      animatePagination({
+        currentIndex,
+        maxIndex,
+        nextIndex: nextIndex,
+      });
+
+      setTimeout(() => {
+        handleProjectContainerDisplay({ currentIndex, nextIndex: nextIndex });
+      }, 800);
+
+      setTimeout(() => {
+        animateProjectIn({ index: nextIndex });
+
+        updateIndexState({ direction: "next" });
+      }, 850);
+    }
+
     const prevButton = document.getElementById("prev");
     const nextButton = document.getElementById("next");
 
-    if (prevButton) {
-      prevButton.addEventListener("click", () => {
-        animateProjectOut({ index: currentIndex });
+    prevButton!.addEventListener("click", showPrevProject);
+    nextButton!.addEventListener("click", showNextProject);
 
-        anime({
-          targets: "#pagination-project-num",
-          innerText: [currentIndex + 1, prevIndex + 1],
-          round: 1,
-          easing: "easeInOutExpo",
-        });
+    const projectsContainer = document.getElementById("projects-container")!;
+    projectsContainer.addEventListener("wheel", (event) => {
+      const direction = event.deltaY < 0 ? "prev" : "next";
 
-        anime({
-          targets: "#pagination-project-line",
-          height: (200 / (maxIndex + 1)) * (prevIndex + 1),
-          easing: "easeInOutExpo",
-        });
-
-        setTimeout(() => {
-          const currentProjectId = `project${currentIndex}`;
-          const prevProjectId = `project${prevIndex}`;
-          const currentProject = document.getElementById(currentProjectId)!;
-          currentProject.style.display = "none";
-          const prevProject = document.getElementById(prevProjectId)!;
-          prevProject.style.display = "flex";
-        }, 800);
-
-        setTimeout(() => {
-          animateProjectIn({ index: prevIndex });
-          currentIndex = prevIndex;
-          nextIndex = calcNextIndex({ currentIndex, maxIndex });
-          prevIndex = calcPrevIndex({ currentIndex, maxIndex });
-        }, 850);
-      });
-    }
-    if (nextButton) {
-      nextButton.addEventListener("click", () => {
-        animateProjectOut({ index: currentIndex });
-
-        anime({
-          targets: "#pagination-project-num",
-          innerText: [currentIndex + 1, nextIndex + 1],
-          round: 1,
-          easing: "easeInOutExpo",
-        });
-
-        anime({
-          targets: "#pagination-project-line",
-          height: (200 / (maxIndex + 1)) * (nextIndex + 1),
-          easing: "easeInOutExpo",
-        });
-
-        setTimeout(() => {
-          const currentProjectId = `project${currentIndex}`;
-          const nextProjectId = `project${nextIndex}`;
-          const currentProject = document.getElementById(currentProjectId)!;
-          currentProject.style.display = "none";
-          const nextProject = document.getElementById(nextProjectId)!;
-          nextProject.style.display = "flex";
-        }, 800);
-
-        setTimeout(() => {
-          animateProjectIn({ index: nextIndex });
-          currentIndex = nextIndex;
-          nextIndex = calcNextIndex({ currentIndex, maxIndex });
-          prevIndex = calcPrevIndex({ currentIndex, maxIndex });
-        }, 850);
-      });
-    }
+      if (direction === "prev") {
+        showPrevProject();
+      } else {
+        showNextProject();
+      }
+    });
   }
 
   main();
