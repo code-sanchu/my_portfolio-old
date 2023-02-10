@@ -17,6 +17,7 @@ const projects: {
   link: {
     text: string;
     url: string;
+    type: "internal" | "external";
   };
   description: string;
 }[] = [
@@ -27,7 +28,8 @@ const projects: {
     description: "website",
     link: {
       text: "visit site",
-      url: "",
+      url: "https://aleshcompton.com",
+      type: "external",
     },
   },
   {
@@ -38,6 +40,7 @@ const projects: {
     link: {
       text: "visit site",
       url: "https://www.thebirchcollective.co.uk/",
+      type: "external",
     },
   },
   {
@@ -47,7 +50,8 @@ const projects: {
     description: "website & cms",
     link: {
       text: "view project",
-      url: "",
+      url: "/work/asatic",
+      type: "internal",
     },
   },
   {
@@ -57,7 +61,8 @@ const projects: {
     description: "website",
     link: {
       text: "visit site",
-      url: "",
+      url: "https://www.amyrodriguez.art/portfolio/1",
+      type: "external",
     },
   },
   {
@@ -67,16 +72,13 @@ const projects: {
     description: "website",
     link: {
       text: "visit site",
-      url: "https://piros.photography/",
+      url: "https://piros.photography",
+      type: "external",
     },
   },
 ];
-// TODO: bug when scroll back - multiyle projects showing
-// Amy: could do with some corner elments;
-// Asatic: doesn't look good. Change colors, title too thick. Doesn't represent look of site.
-// Amma: do new downloaded image
-// Alesh: wait for new content.
-// include a "see more slide"? Have enough content?
+// better animations
+// some more descriptive text about site: e.g.for birch, add charity; asatic, add multilingual journal
 ---
 
 <div class="w-screen h-screen grid place-items-center font-display-secondary">
@@ -171,7 +173,14 @@ const projects: {
                       : ""
                   }`}
                 >
-                  {project.link.text}
+                  <a
+                    href={project.link.url}
+                    target={
+                      project.link.type === "external" ? "_blank" : "_self"
+                    }
+                  >
+                    {project.link.text}
+                  </a>
                 </p>
               </div>
             </div>
