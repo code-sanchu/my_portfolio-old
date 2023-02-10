@@ -25,7 +25,7 @@
 }
 @font-face {
   font-family: "EB";
-  src: url("/fonts/EB.woff") format("woff");
+  src: url("/fonts/EB.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
 }
@@ -49,7 +49,7 @@
 }
 @font-face {
   font-family: "IBMMono_B";
-  src: url("/fonts/IBMMono_b.woff2") format("woff2");
+  src: url("/fonts/IBMMono_B.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
 }

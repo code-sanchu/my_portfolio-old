@@ -80,22 +80,80 @@ const projects: {
 ---
 
 <div class="w-screen h-screen grid place-items-center font-display-secondary">
-  <div id="projects-container" data-num-projects={projects.length}>
-    {
-      projects.map((project, i) => (
-        <div
-          id={`project${i}`}
-          class={`flex overflow-hidden  ${i === 0 ? "" : "hidden"}`}
-        >
-          <div class="relative w-[350px] h-[500px] translate-y-full">
-            <Image id={`image${i}`} src={project.image} alt="" format="avif" />
-          </div>
-          <div class="flex flex-col justify-end">
-            <div class="mb-xl ml-xl">
+  <div class="flex justify-between items-center w-[80vw]">
+    <div id="projects-container" data-num-projects={projects.length}>
+      {
+        projects.map((project, i) => (
+          <div
+            id={`project${i}`}
+            class={`flex overflow-hidden  ${i === 0 ? "" : "hidden"}`}
+          >
+            <div class="relative w-[350px] h-[500px] translate-y-full">
+              <Image
+                id={`image${i}`}
+                src={project.image}
+                alt=""
+                format="avif"
+              />
+            </div>
+            <div class="flex flex-col justify-end">
+              <div class="mb-xl ml-xl">
+                <div class="translate-y-full">
+                  <p
+                    id={`description${i}`}
+                    class={`flex items-center gap-sm opacity-0 ${
+                      project.id === "amy"
+                        ? "font-amy"
+                        : project.id === "asatic"
+                        ? "font-asatic-r"
+                        : project.id === "alesh"
+                        ? "font-alesh"
+                        : project.id === "birch"
+                        ? "font-birch tracking-wide text-xl"
+                        : project.id === "piros"
+                        ? "font-piros"
+                        : ""
+                    }`}
+                  >
+                    <span>{project.description}</span>
+                    <span class="w-[18px] h-[1px] block bg-black" />
+                  </p>
+                </div>
+              </div>
+              <div class="-translate-x-[80px]">
+                <div class="translate-y-full">
+                  {project.title.type === "text" ? (
+                    <h2
+                      id={`title${i}`}
+                      class={`text-7xl bg-work-title bg-clip-text text-transparent mb-3xl opacity-0 flex flex-col ${
+                        project.id === "asatic"
+                          ? "font-asatic-r"
+                          : project.id === "alesh"
+                          ? "font-alesh tracking-wide"
+                          : project.id === "birch"
+                          ? "font-birch-b"
+                          : project.id === "piros"
+                          ? "font-piros font-bold"
+                          : ""
+                      }`}
+                    >
+                      {typeof project.title.text === "string"
+                        ? project.title.text
+                        : project.title.text.map((line) => (
+                            <span class="">{line}</span>
+                          ))}
+                    </h2>
+                  ) : (
+                    <div id={`title${i}`} class="w-[350px] mb-3xl opacity-0">
+                      <Image src={project.title.url} alt="" format="avif" />
+                    </div>
+                  )}
+                </div>
+              </div>
               <div class="translate-y-full">
                 <p
-                  id={`description${i}`}
-                  class={`flex items-center gap-sm opacity-0 ${
+                  id={`link${i}`}
+                  class={`pl-2xl opacity-0 ${
                     project.id === "amy"
                       ? "font-amy"
                       : project.id === "asatic"
@@ -103,74 +161,36 @@ const projects: {
                       : project.id === "alesh"
                       ? "font-alesh"
                       : project.id === "birch"
-                      ? "font-birch tracking-wide text-xl"
+                      ? "font-birch text-lg"
                       : project.id === "piros"
                       ? "font-piros"
                       : ""
                   }`}
                 >
-                  <span>{project.description}</span>
-                  <span class="w-[18px] h-[1px] block bg-black" />
+                  {project.link.text}
                 </p>
               </div>
             </div>
-            <div class="-translate-x-[80px]">
-              <div class="translate-y-full">
-                {project.title.type === "text" ? (
-                  <h2
-                    id={`title${i}`}
-                    class={`text-7xl bg-work-title bg-clip-text text-transparent mb-3xl opacity-0 flex flex-col ${
-                      project.id === "asatic"
-                        ? "font-asatic-r"
-                        : project.id === "alesh"
-                        ? "font-alesh-b tracking-wide"
-                        : project.id === "birch"
-                        ? "font-birch-b"
-                        : project.id === "piros"
-                        ? "font-piros font-bold"
-                        : ""
-                    }`}
-                  >
-                    {typeof project.title.text === "string"
-                      ? project.title.text
-                      : project.title.text.map((line) => (
-                          <span class="">{line}</span>
-                        ))}
-                  </h2>
-                ) : (
-                  <div id={`title${i}`} class="w-[350px] mb-3xl opacity-0">
-                    <Image src={project.title.url} alt="" format="avif" />
-                  </div>
-                )}
-              </div>
-            </div>
-            <div class="translate-y-full">
-              <p
-                id={`link${i}`}
-                class={`pl-2xl opacity-0 ${
-                  project.id === "amy"
-                    ? "font-amy"
-                    : project.id === "asatic"
-                    ? "font-asatic-r"
-                    : project.id === "alesh"
-                    ? "font-alesh"
-                    : project.id === "birch"
-                    ? "font-birch text-lg"
-                    : project.id === "piros"
-                    ? "font-piros"
-                    : ""
-                }`}
-              >
-                {project.link.text}
-              </p>
-            </div>
           </div>
+        ))
+      }
+      <div class="flex justify-between px-md font-display-primary mt-sm">
+        <button id="prev" type="button">&lt;</button>
+        <button id="next" type="button">&gt;</button>
+      </div>
+    </div>
+    <div class="flex flex-col items-center gap-sm">
+      <div>
+        0<span class="inline-block" id="pagination-project-num">1</span>.
+      </div>
+      <div class="relative h-[200px] w-[1.5px] bg-gray-300">
+        <div
+          id="pagination-project-line"
+          class="h-[40px] w-[1.5px] bg-black absolute"
+        >
         </div>
-      ))
-    }
-    <div class="flex justify-between px-md font-display-primary mt-sm">
-      <button id="prev" type="button">&lt;</button>
-      <button id="next" type="button">&gt;</button>
+      </div>
+      <div>05.</div>
     </div>
   </div>
 </div>
@@ -293,6 +313,19 @@ const projects: {
       prevButton.addEventListener("click", () => {
         animateProjectOut({ index: currentIndex });
 
+        anime({
+          targets: "#pagination-project-num",
+          innerText: [currentIndex + 1, prevIndex + 1],
+          round: 1,
+          easing: "easeInOutExpo",
+        });
+
+        anime({
+          targets: "#pagination-project-line",
+          height: (200 / (maxIndex + 1)) * (prevIndex + 1),
+          easing: "easeInOutExpo",
+        });
+
         setTimeout(() => {
           const currentProjectId = `project${currentIndex}`;
           const prevProjectId = `project${prevIndex}`;
@@ -304,7 +337,7 @@ const projects: {
 
         setTimeout(() => {
           animateProjectIn({ index: prevIndex });
-          currentIndex = nextIndex;
+          currentIndex = prevIndex;
           nextIndex = calcNextIndex({ currentIndex, maxIndex });
           prevIndex = calcPrevIndex({ currentIndex, maxIndex });
         }, 850);
@@ -313,6 +346,19 @@ const projects: {
     if (nextButton) {
       nextButton.addEventListener("click", () => {
         animateProjectOut({ index: currentIndex });
+
+        anime({
+          targets: "#pagination-project-num",
+          innerText: [currentIndex + 1, nextIndex + 1],
+          round: 1,
+          easing: "easeInOutExpo",
+        });
+
+        anime({
+          targets: "#pagination-project-line",
+          height: (200 / (maxIndex + 1)) * (nextIndex + 1),
+          easing: "easeInOutExpo",
+        });
 
         setTimeout(() => {
           const currentProjectId = `project${currentIndex}`;
