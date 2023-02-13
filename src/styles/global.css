@@ -65,6 +65,12 @@
   font-weight: 700;
   font-style: normal;
 }
+@font-face {
+  font-family: "WS_r";
+  src: url("/fonts/WS_r.ttf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
 
 * {
   box-sizing: border-box;

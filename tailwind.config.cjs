@@ -5,6 +5,7 @@ module.exports = {
     fontFamily: {
       "display-primary": ["VG", "sans-serif"],
       "display-secondary": ["FN", "sans-serif"],
+      "body-primary": ["WS_r", "sans-serif"],
       amy: ["EB", "serif"],
       "asatic-eb": ["NM_EB", "sans-serif"],
       "asatic-b": ["NM_B", "sans-serif"],
