@@ -1,128 +1,134 @@
 ---
 import { Image } from "@astrojs/image/components";
-
-import Layout from "~layouts/Layout.astro";
 import HorizontalScrollContainer from "~components/HorizontalScrollContainer.astro";
+import TextSection from "~components/TextSection.astro";
 
-import cmsToSite from "~images/work/asatic/Asatic-CMS-to-Site.jpg";
-// import cms1 from "~images/work/asatic/cms-dragging-landing-component.png";
-// TODO: add e.g. custom buiilt components (article editor); user feedback, status of documents.
-// ...user friendly default for ease of use (text + image summary); ease of use components (auto-fill button on landing)
+import { asaticImage } from "~images/index";
+import Layout from "~layouts/Layout.astro";
+
+import asaticVid from "../../video/asatic_cms_landing.webm";
 ---
 
-<Layout pageTitle="Asatic">
-  <main>
-    <div>
-      <div class="header">
-        <h1>ASATiC</h1>
-        <div class="second-line">
-          <p>Design and build of website and CMS.</p>
-          <a href="https://asatic-frontend.vercel.app/"
-            >visit site ↗ <span>[site being populated]</span></a
-          >
+<vid></vid>
+<Layout>
+  <div class="flex justify-center py-2xl px-2xl font-body-primary">
+    <div class="w-full max-w-[1600px]">
+      <TextSection>
+        <h1 class="font-asatic-r text-5xl">Asatic</h1>
+        <div class="flex justify-between items-baseline">
+          <p class="mt-sm">Multilingual online journal.</p>
+          <div>
+            <a
+              class="uppercase text-xs text-gray-700 cursor-pointer"
+              href="https://www.asatic.org/"
+              target="_blank">visit site</a
+            >
+          </div>
         </div>
-      </div>
-      <div class="first-image-section">
+      </TextSection>
+      <div class="py-md">
         <HorizontalScrollContainer>
-          <div class="images-container">
-            <div class="image-1-container">
-              <Image src={cmsToSite} fit="contain" alt="" format="avif" />
-            </div>
+          <div
+            class="relative inline-flex justify-items-stretch gap-md h-40vh max-h-[1000px]"
+          >
+            <Image
+              src={asaticImage.front_screenshot1}
+              fit="contain"
+              alt=""
+              format="avif"
+              class="inline-block max-h-[600px] w-auto"
+            />
+            <Image
+              src={asaticImage.front_screenshot2}
+              fit="contain"
+              alt=""
+              format="avif"
+              class="inline-block max-h-[600px] w-auto"
+            />
+            <Image
+              src={asaticImage.front_screenshot3}
+              fit="contain"
+              alt=""
+              format="avif"
+              class="inline-block max-h-[600px] w-auto"
+            />
           </div>
         </HorizontalScrollContainer>
-        <div class="caption">
-          From left to right: the custom CMS resembles the site as closely as
-          possible. It's functionality includes draggable, resizable components.
+      </div>
+      <TextSection>
+        <div class="flex gap-md">
+          <h3 class="text-gray-600 uppercase">Tech</h3>
+          <div class="flex gap-sm">
+            <p>nextjs</p><p>react</p><p>tailwind & twin.macro</p><p>
+              firebase
+            </p><p>redux</p><p>typescript</p>
+          </div>
         </div>
-      </div>
-      <div class="overview">
-        <h2>Overview</h2>
-        <p class="text-section">
-          Tasked with building a multilingual online journal, I was given free
-          range over the design and implentation of this site. The site itself
-          has a clean, classical design in line with the serious social and
-          political discourse it hosts. The CMS is packed full of functionality
-          whilst remaining decluttered and resembling the actual site as closely
-          as possible.
-        </p>
-      </div>
+        <div class="mt-md">
+          <h3 class="text-gray-600 uppercase">Brief</h3>
+          <p class="mt-xxs">
+            We were tasked with building a multilingual online journal. We were
+            given free reign over the design and implentation. The site itself
+            has a clean, classical design in line with the serious social and
+            political discourse it's a platform for. The CMS is packed full of
+            functionality whilst remaining decluttered and resembling the actual
+            site as closely as possible.
+          </p>
+        </div>
+        <div class="mt-md">
+          <h3 class="uppercase text-gray-600">Customisation and ergonomics</h3>
+          <div class="aspect-video py-sm" id="video1-container">
+            <video id="video1">
+              <source src={asaticVid} />
+            </video>
+          </div>
+          <p class="mt-xxs">
+            We wanted the CMS to facilitate a non-generic site design whilst not
+            overwhelming the user. The CMS's landing page, for example, has
+            draggable, resizable components to allow for customisation; it also
+            can be auto-populated with the latest content with good-looking
+            component defaults. Text and images are taken from the created
+            articles and the user can update summaries as they appear, on e.g.
+            the landing, if they so wish. <br />
+            Menus appear in context and buttons are spaced and coloured to prevent
+            visual clutter.
+          </p>
+        </div>
+        <div class="mt-md">
+          <h3 class="uppercase text-gray-600">Utilising SSG for performance</h3>
+          <Image
+            class="py-lg"
+            src={asaticImage.performance}
+            alt=""
+            format="avif"
+          />
+          <p class="mt-xxs">
+            CMS's are not generally associated with performance. However, with
+            our choice of tech stack we can get good numbers. The flow: the
+            client writes an article &#8594; the client saves and clicks on the
+            'deploy' button &#8594; the site build is triggered with new pages
+            populated with data their data fetched during this build. This is
+            called "static site generation"; it prevents users of the site from
+            having to fetch data as another request which means better
+            performance.<br />
+            See google's performance results for this site <a
+              href="https://pagespeed.web.dev/report?url=https%3A%2F%2Faleshcompton.com%2F"
+              class="text-blue-600">here</a
+            >.
+          </p>
+        </div>
+      </TextSection>
     </div>
-  </main>
+  </div>
 </Layout>
 
-<style>
-  .overview {
-    margin-top: 1.5rem;
-    font-weight: 400;
-  }
-  .overview h2 {
-    font-weight: 400;
-    font-size: larger;
-    text-transform: uppercase;
-  }
-  .overview p {
-    margin-top: 1rem;
-  }
-  main {
-    font-family: "KR", sans-serif;
-    display: flex;
-    justify-content: center;
-  }
-  main > div {
-    margin-top: 20vh;
-    width: 80vw;
-    max-width: 1200px;
-  }
-  .text-section {
-    max-width: 768px;
-    width: 768px;
-    line-height: 1.4rem;
-  }
-  .header h1 {
-    font-weight: 400;
-    font-size: 60px;
-    letter-spacing: 2px;
-  }
-  .header .second-line {
-    margin-top: 0.5rem;
-    display: flex;
-    justify-content: space-between;
-    gap: 0.5rem;
-  }
-  .header .second-line a {
-    position: relative;
-  }
-  .header .second-line a span {
-    position: absolute;
-    white-space: nowrap;
-    right: 0;
-    color: lightgray;
-    transform: translateY(calc(100% + 3px));
-  }
-  .first-image-section {
-    margin-top: 3rem;
-  }
-  .first-image-section .caption {
-    margin-top: 0.5rem;
-    color: #43433eff;
-  }
-  .images-container {
-    position: relative;
-    display: inline-flex;
-    align-items: flex-start;
-    justify-content: stretch;
-    gap: 1vw;
-    height: 100%;
-  }
-  .first-image-section .image-1-container {
-    position: relative;
-    width: 1000px;
-  }
-  .first-image-section img {
-    /* position: absolute; */
-    /* width: 100%; */
-    display: inline-block;
-    width: 100%;
-    height: auto;
-  }
-</style>
+<script>
+  const videoContainer = document.getElementById("video1-container")!;
+  const video = document.getElementById("video1")!;
+  videoContainer.addEventListener("mouseover", () => {
+    video.setAttribute("controls", "");
+  });
+  videoContainer.addEventListener("mouseleave", () => {
+    video.removeAttribute("controls");
+  });
+</script>

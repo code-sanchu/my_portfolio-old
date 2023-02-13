@@ -12,23 +12,9 @@ export const projects: Project[] = [
       siteType: "website",
     },
     link: {
-      text: "visit site",
-      url: "https://aleshcompton.com",
-      type: "external",
-    },
-  },
-  {
-    id: "birch",
-    title: { type: "text", text: "Birch Collective" },
-    image: sliderImage.birch,
-    description: {
-      siteAbout: "British based charity",
-      siteType: "website & cms",
-    },
-    link: {
-      text: "visit site",
-      url: "https://www.thebirchcollective.co.uk/",
-      type: "external",
+      text: "view project",
+      url: "/work/alesh-compton",
+      type: "internal",
     },
   },
   {
@@ -43,6 +29,20 @@ export const projects: Project[] = [
       text: "view project",
       url: "/work/asatic",
       type: "internal",
+    },
+  },
+  {
+    id: "birch",
+    title: { type: "text", text: "Birch Collective" },
+    image: sliderImage.birch,
+    description: {
+      siteAbout: "Bristol based charity for young people",
+      siteType: "website & cms",
+    },
+    link: {
+      text: "visit site",
+      url: "https://www.thebirchcollective.co.uk/",
+      type: "external",
     },
   },
   {

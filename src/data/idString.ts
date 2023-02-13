@@ -1,4 +1,4 @@
-export const idString = {
+export const projectIdString = {
   projectContainer: "projectContainer",
   project: "project",
   projectImage: "projectImage",

@@ -1,0 +1,79 @@
+---
+import { Image } from "@astrojs/image/components";
+import TextSection from "~components/TextSection.astro";
+
+import { aleshImage } from "~images/index";
+import Layout from "~layouts/Layout.astro";
+---
+
+<Layout>
+  <div class="flex justify-center py-2xl px-2xl font-body-primary">
+    <div class="w-full max-w-[1600px]">
+      <TextSection>
+        <h1 class="font-alesh text-4xl">Alesh Compton</h1>
+        <div class="flex justify-between items-baseline">
+          <p class="mt-sm">Video artist and photographer portfolio</p>
+          <div>
+            <a
+              class="uppercase text-xs text-gray-700 cursor-pointer"
+              href="https://aleshcompton.com/"
+              target="_blank">visit site</a
+            >
+          </div>
+        </div>
+      </TextSection>
+      <Image class="py-lg" src={aleshImage.screenshot1} alt="" format="avif" />
+      <TextSection>
+        <div class="flex gap-md">
+          <h3 class="text-gray-600 uppercase">Tech</h3>
+          <div class="flex gap-sm">
+            <p class="text-blue-600">
+              <a href="https://astro.build/">astro</a>
+            </p><p>vanillajs</p>
+          </div>
+        </div>
+        <div class="mt-md">
+          <h3 class="text-gray-600 uppercase">Brief</h3>
+          <p class="mt-xxs">
+            We were tasked to create a highly performant image and video heavy
+            portfolio, with a minimal, raw style.
+          </p>
+        </div>
+        <div class="mt-md">
+          <h3 class="uppercase text-gray-600">Perfect Performance</h3>
+          <Image
+            class="py-lg"
+            src={aleshImage.performance}
+            alt=""
+            format="avif"
+          />
+          <p class="mt-xxs">
+            Utilising the new frontend paradigm of islands architecture, with ,
+            as well as optimising images and "lazy loading" video scripts, we
+            achieved perfect performance scores. See google's performance
+            results for this site <a
+              href="https://pagespeed.web.dev/report?url=https%3A%2F%2Faleshcompton.com%2F"
+              class="text-blue-600">here</a
+            >.<br />Performance means sites load in faster and respond snappily,
+            which increases the user's sense of quality in general, and with low
+            internet speeds, e.g. with mobiles, means users are less likely to
+            click away from the site.
+          </p>
+        </div>
+        <div class="mt-md">
+          <h3 class="uppercase text-gray-600">PERFECT SEO</h3>
+          <p class="mt-xxs">
+            Search engine optimisation means search engines, such as google, can
+            understand what's on the site and so rank it higher on relevant
+            searches. We chose to use astro in part because it allows the site
+            to be a multi-page app which in turn allows for perfect seo.
+          </p>
+          <p class="italic text-gray-700 mt-xxxs">
+            Please note: the drop in SEO score is due to using smaller than
+            recommended font size at the client's request.
+          </p>
+        </div>
+      </TextSection>
+    </div>
+  </div>
+</Layout>
