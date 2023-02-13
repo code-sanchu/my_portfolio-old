@@ -1,85 +1,9 @@
 ---
 import { Image } from "@astrojs/image/components";
 
-import { sliderImage } from "~images/index";
-
-import amyLogo from "~images/work/amy/logo.png";
-
-import type { Project } from "~types/index";
 import { idString } from "~data/idString";
 
-const projects: Project[] = [
-  {
-    id: "alesh",
-    title: { type: "text", text: ["Alesh", "Compton"] },
-    image: sliderImage.alesh,
-    description: {
-      siteAbout: "Video artist and photographer portfolio",
-      siteType: "website",
-    },
-    link: {
-      text: "visit site",
-      url: "https://aleshcompton.com",
-      type: "external",
-    },
-  },
-  {
-    id: "birch",
-    title: { type: "text", text: "Birch Collective" },
-    image: sliderImage.birch,
-    description: {
-      siteAbout: "British based charity",
-      siteType: "website & cms",
-    },
-    link: {
-      text: "visit site",
-      url: "https://www.thebirchcollective.co.uk/",
-      type: "external",
-    },
-  },
-  {
-    id: "asatic",
-    title: { type: "text", text: "ASATiC" },
-    image: sliderImage.asatic,
-    description: {
-      siteAbout: "Multilingual online news journal",
-      siteType: "website & cms",
-    },
-    link: {
-      text: "view project",
-      url: "/work/asatic",
-      type: "internal",
-    },
-  },
-  {
-    id: "amy",
-    title: { type: "image", url: amyLogo },
-    image: sliderImage.amy,
-    description: {
-      siteAbout: "Jewellery portfolio and shop",
-      siteType: "website",
-    },
-    link: {
-      text: "visit site",
-      url: "https://www.amyrodriguez.art/portfolio/1",
-      type: "external",
-    },
-  },
-  {
-    id: "piros",
-    title: { type: "text", text: ["Piros", "Photography"] },
-    image: sliderImage.piros,
-    description: {
-      siteAbout: "Photograpy portfolio",
-      siteType: "website & cms",
-    },
-    link: {
-      text: "visit site",
-      url: "https://piros.photography",
-      type: "external",
-    },
-  },
-];
+import { projects } from "./data";
 ---
 
 <div class="w-screen h-screen grid place-items-center font-display-secondary">
@@ -104,7 +28,7 @@ const projects: Project[] = [
               />
             </div>
             <div class="flex flex-col justify-end">
-              <div class="mb-xl ml-xl">
+              <div class="mb-[90px] ml-xl">
                 <div class="translate-y-full font-body-primary">
                   <p
                     id={`${idString.projectType}${i}`}
@@ -122,7 +46,7 @@ const projects: Project[] = [
                 </div>
               </div>
               <div class="-translate-x-[80px]">
-                <div class="translate-y-full">
+                <div class="translate-y-20px">
                   {project.title.type === "text" ? (
                     <h2
                       id={`${idString.projectTitle}${i}`}
@@ -154,26 +78,22 @@ const projects: Project[] = [
                   )}
                 </div>
               </div>
-              <div class="translate-y-full">
-                <p
-                  id={`${idString.projectLink}${i}`}
-                  class={`pl-2xl opacity-0 font-body-primary`}
+              <p
+                id={`${idString.projectLink}${i}`}
+                class={`pl-2xl opacity-0 font-body-primary`}
+              >
+                <a
+                  href={project.link.url}
+                  target={project.link.type === "external" ? "_blank" : "_self"}
                 >
-                  <a
-                    href={project.link.url}
-                    target={
-                      project.link.type === "external" ? "_blank" : "_self"
-                    }
-                  >
-                    {project.link.text}
-                  </a>
-                </p>
-              </div>
+                  {project.link.text}
+                </a>
+              </p>
             </div>
           </div>
         ))
       }
-      <div class="flex flex-col items-center gap-sm">
+      <div class="flex flex-col items-center gap-sm text-gray-800">
         <div>
           0<span class="inline-block" id={idString.projectPaginationNum}>1</span
           >.
@@ -181,7 +101,7 @@ const projects: Project[] = [
         <div class="relative h-[200px] w-[1.5px] bg-gray-300">
           <div
             id={idString.projectPaginationLine}
-            class="h-[40px] w-[1.5px] bg-black absolute"
+            class="h-[40px] w-[1.5px] bg-gray-800 absolute"
           >
           </div>
         </div>
@@ -227,7 +147,7 @@ const projects: Project[] = [
       easing: "spring(6, 70, 80, 4)",
     });
     title.add({
-      translateY: "-100%",
+      translateY: "-20px",
       opacity: 1,
     });
 
@@ -237,7 +157,7 @@ const projects: Project[] = [
       easing: "spring(6, 70, 80, 4)",
     });
     link.add({
-      translateY: "-100%",
+      // translateY: "-100%",
       opacity: 1,
     });
 
@@ -264,9 +184,11 @@ const projects: Project[] = [
     type.add({
       translateY: "0%",
     });
+
     const about = anime.timeline({
       targets: `#${idString.projectAbout}${index}`,
       easing: "spring(6, 70, 80, 4)",
+      delay: 50,
     });
     about.add({
       translateY: "-200%",
@@ -282,11 +204,11 @@ const projects: Project[] = [
       easing: "spring(6, 70, 80, 4)",
     });
     title.add({
-      translateY: "-200%",
+      translateY: "-40px",
       opacity: 0,
     });
     title.add({
-      translateY: "0%",
+      translateY: 0,
     });
 
     const link = anime.timeline({
@@ -295,16 +217,12 @@ const projects: Project[] = [
       easing: "spring(6, 70, 80, 4)",
     });
     link.add({
-      translateY: "-200%",
       opacity: 0,
-    });
-    link.add({
-      translateY: "0%",
     });
 
     const currentImage = anime.timeline({
+      delay: 200,
       targets: `#${idString.projectImage}${index}`,
-      delay: 400,
       easing: "spring(6, 70, 80, 3)",
     });
     currentImage.add({
