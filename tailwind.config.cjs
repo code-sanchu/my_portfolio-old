@@ -19,7 +19,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         "work-title":
-          "linear-gradient(to right, white 0%, white 80px, black 80px, black 100%)",
+          "linear-gradient(to right, white 0%, white 60px, black 60px, black 100%)",
       },
       spacing: {
         xxxs: ".1rem",
@@ -29,6 +29,7 @@ module.exports = {
         md: "1.5rem",
         lg: "2rem",
         xl: "3rem",
+        "1.5xl": "4.5rem",
         "2xl": "6rem",
         "2.5xl": "7.5rem",
         "3xl": "9rem",
