@@ -1,9 +1,16 @@
 ---
-import Navigation from "../components/Navigation.astro";
 import "../styles/global.css";
+
+import Navigation from "../components/Navigation.astro";
 
 export interface Props {
   pageTitle?: string;
+}
+
+declare global {
+  interface Window {
+    isMousedOverProjects: boolean;
+  }
 }
 
 // const { pageTitle } = Astro.props;
@@ -19,14 +26,73 @@ export interface Props {
     <title>VirtualWorks. Curated Sites.</title>
     <link rel="stylesheet" href="https://use.typekit.net/ewe1rrd.css" />
   </head>
-  <body>
+  <body id="body" class="w-screen h-screen">
     <Navigation />
     <slot />
   </body>
 </html>
-<style is:global>
-  body {
-    /* font-family: "VG", sans-serif; */
-    /* color: rgba(44, 36, 33, 255); */
+
+<script>
+  import { projectIdString } from "~data/idString";
+
+  function handlePageChangeOnMouseWheel() {
+    const body = document.getElementById("body")!;
+
+    body.addEventListener("wheel", (event) => {
+      const currentLocation = window.location.pathname;
+
+      const isNextPage = currentLocation === "/" || currentLocation === "/work";
+      const isPrevPage =
+        currentLocation === "/work" || currentLocation === "/services";
+
+      if (!isNextPage && !isPrevPage) {
+        return;
+      }
+
+      if (window.isMousedOverProjects) {
+        return;
+      }
+
+      const direction = event.deltaY < 0 ? "up" : "down";
+
+      if (isNextPage && direction === "down") {
+        const nextPageRoute = currentLocation === "/" ? "/work" : "/services";
+        window.location.href = nextPageRoute;
+      }
+      if (isPrevPage && direction === "up") {
+        const nextPageRoute = currentLocation === "/work" ? "/" : "/work";
+        window.location.href = nextPageRoute;
+      }
+    });
   }
-</style>
+
+  function trackProjectsMouseOver() {
+    const currentLocation = window.location.pathname;
+
+    if (currentLocation !== "/work") {
+      return;
+    }
+
+    const projectsContainer = document.getElementById(
+      projectIdString.projectContainer
+    );
+
+    if (!projectsContainer) {
+      return;
+    }
+
+    projectsContainer.addEventListener("mouseover", () => {
+      window.isMousedOverProjects = true;
+    });
+    projectsContainer.addEventListener("mouseleave", () => {
+      window.isMousedOverProjects = false;
+    });
+  }
+
+  const main = () => {
+    handlePageChangeOnMouseWheel();
+    trackProjectsMouseOver();
+  };
+
+  main();
+</script>
