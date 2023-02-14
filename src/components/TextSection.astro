@@ -1,3 +1,15 @@
+---
+type Props = {
+  width?: "tight";
+};
+
+const { width } = Astro.props;
+---
+
 <div class="flex justify-center">
-  <div class="max-w-[768px] w-full"><slot /></div>
+  <div
+    class={`${width === "tight" ? "max-w-[590px]" : "max-w-[768px]"} w-full`}
+  >
+    <slot />
+  </div>
 </div>

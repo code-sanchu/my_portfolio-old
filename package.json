@@ -11,11 +11,11 @@
     "astro": "astro"
   },
   "dependencies": {
+    "sharp": "^0.31.3",
     "@astrojs/image": "^0.14.0",
     "@astrojs/tailwind": "^3.0.1",
     "animejs": "^3.2.1",
     "astro": "^2.0.4",
-    "sharp": "^0.31.3",
     "tailwindcss": "^3.0.24"
   },
   "devDependencies": {

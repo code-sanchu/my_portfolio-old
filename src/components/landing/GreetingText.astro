@@ -1,120 +1,42 @@
-<div class="container">
-  <div class="first-line">
-    <div class="bracket bracket-1">[</div>
-    <div class="first-line-digit">C</div>
-    <div class="first-line-digit">u</div>
-    <div class="first-line-digit">r</div>
-    <div class="first-line-digit">a</div>
-    <div class="first-line-digit">t</div>
-    <div class="first-line-digit">e</div>
-    <div class="first-line-digit">d</div>
-    <div class="first-line-digit new-word">s</div>
-    <div class="first-line-digit">i</div>
-    <div class="first-line-digit">t</div>
-    <div class="first-line-digit">e</div>
-    <div class="first-line-digit">s</div>
-    <div class="bracket bracket-2">]</div>
+<div
+  class="fixed left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 flex flex-col gap-md"
+>
+  <div class="font-body-primary tracking-wide opacity-0" id="curated">
+    [ Curated sites ]
   </div>
-  <div class="site-name-container">
-    <div class="site-name-line second-line">
-      <div>V</div>
-      <div>&Icirc;</div>
-      <div>r</div>
-      <div>t</div>
-      <div>u</div>
-      <div>&aacute;</div>
-      <div>l</div>
-    </div>
-    <div class="site-name-line third-line">
-      <div>W</div>
-      <div>&odblac;</div>
-      <div>r</div>
-      <div>k</div>
-      <div>s</div>
-    </div>
+  <div class="small-caps text-[70px] font-display-primary tracking-wider">
+    <div class="opacity-0" id="first-line">V&Icirc;rtu&aacute;l</div>
+    <div class="opacity-0" id="second-line">W&odblac;rks</div>
   </div>
 </div>
-
-<style>
-  .container {
-    position: absolute;
-    left: 50%;
-    top: 40%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    font-family: "VG", sans-serif;
-  }
-  .first-line {
-    display: flex;
-    gap: 1px;
-    /* color: rgb(170, 172, 160, 255); */
-    color: rgba(63, 64, 53, 255);
-  }
-  .first-line-digit {
-    opacity: 0;
-  }
-  .new-word {
-    margin-left: 7px;
-  }
-  .bracket {
-    transform: translateY(-10px);
-  }
-  .bracket-1 {
-    margin-right: 2px;
-  }
-  .bracket-2 {
-    margin-left: 2px;
-  }
-  .site-name-container {
-    font-variant: small-caps;
-    font-size: 70px;
-    letter-spacing: 5px;
-    /* color: #0e1c33; */
-    color: rgba(44, 36, 33, 255);
-  }
-  .site-name-line {
-    display: flex;
-    gap: 1px;
-    opacity: 0;
-    transform-origin: center center 0;
-  }
-  .second-line {
-  }
-  .third-line {
-  }
-  .a {
-    font-size: 100px;
-  }
-</style>
 
 <script>
   import anime from "animejs/lib/anime.es";
 
   anime({
-    targets: ".first-line-digit",
+    targets: "#first-line",
     translateY: -10,
     opacity: 1,
-    delay: anime.stagger(40),
     easing: "easeInCubic",
-    duration: 400,
+    delay: 300,
+    duration: 800,
   });
 
   anime({
-    delay: 300,
-    targets: ".second-line",
+    targets: "#second-line",
+    translateY: -20,
     opacity: 1,
     easing: "easeInCubic",
-    duration: 600,
-    translateY: -10,
+    delay: 350,
+    duration: 800,
   });
+
   anime({
-    delay: 400,
-    targets: ".third-line",
+    targets: "#curated",
+    // translateY: -20,
     opacity: 1,
     easing: "easeInCubic",
-    duration: 600,
-    translateY: -10,
+    delay: 350,
+    duration: 800,
   });
 </script>
