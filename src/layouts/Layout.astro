@@ -9,6 +9,7 @@ export interface Props {
 
 declare global {
   interface Window {
+    awaitingPageChange: boolean;
     isMousedOverProjects: boolean;
   }
 }
@@ -26,19 +27,25 @@ declare global {
     <title>VirtualWorks. Curated Sites.</title>
     <link rel="stylesheet" href="https://use.typekit.net/ewe1rrd.css" />
   </head>
-  <body id="body" class="w-screen h-screen">
+  <body id="body" class="min-w-screen min-h-screen">
     <Navigation />
-    <slot />
+    <div class="w-full h-full" id="content-container">
+      <slot />
+    </div>
   </body>
 </html>
 
 <script>
+  import anime from "animejs";
   import { projectIdString } from "~data/idString";
 
   function handlePageChangeOnMouseWheel() {
     const body = document.getElementById("body")!;
 
     body.addEventListener("wheel", (event) => {
+      if (window.awaitingPageChange) {
+        return;
+      }
       const currentLocation = window.location.pathname;
 
       const isNextPage = currentLocation === "/" || currentLocation === "/work";
@@ -56,17 +63,42 @@ declare global {
       const direction = event.deltaY < 0 ? "up" : "down";
 
       if (isNextPage && direction === "down") {
+        window.awaitingPageChange = true;
+
         const nextPageRoute = currentLocation === "/" ? "/work" : "/services";
-        window.location.href = nextPageRoute;
+
+        fadePageOut();
+
+        setTimeout(() => {
+          window.awaitingPageChange = false;
+          window.location.href = nextPageRoute;
+        }, 450);
       }
       if (isPrevPage && direction === "up") {
+        window.awaitingPageChange = true;
+
         const nextPageRoute = currentLocation === "/work" ? "/" : "/work";
-        window.location.href = nextPageRoute;
+
+        fadePageOut();
+
+        setTimeout(() => {
+          window.awaitingPageChange = false;
+          window.location.href = nextPageRoute;
+        }, 450);
       }
     });
   }
 
-  function trackProjectsMouseOver() {
+  function fadePageOut() {
+    anime({
+      targets: "#content-container",
+      opacity: 0,
+      easing: "easeOutCubic",
+      duration: 400,
+    });
+  }
+
+  function trackProjectsContainerIsMousedOverOnWorkPage() {
     const currentLocation = window.location.pathname;
 
     if (currentLocation !== "/work") {
@@ -90,8 +122,8 @@ declare global {
   }
 
   const main = () => {
+    trackProjectsContainerIsMousedOverOnWorkPage();
     handlePageChangeOnMouseWheel();
-    trackProjectsMouseOver();
   };
 
   main();
