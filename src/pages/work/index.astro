@@ -6,14 +6,17 @@ import Layout from "~layouts/Layout.astro";
 import Projects from "~components/work/Projects.astro";
 ---
 
-<Layout pageTitle="work">
+<Layout
+  preloadFonts={[
+    "alesh",
+    "asatic-r",
+    "birch-b",
+    "body-primary",
+    "display-primary",
+    "piros",
+  ]}
+>
   <main class="min-h-screen grid place-items-center">
     <Projects />
   </main>
 </Layout>
-
-<style>
-  main {
-    position: relative;
-  }
-</style>

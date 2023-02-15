@@ -3,8 +3,39 @@ import "../styles/global.css";
 
 import Navigation from "../components/Navigation.astro";
 
+type FontName =
+  | "display-primary"
+  | "body-primary"
+  | "asatic-r"
+  | "alesh"
+  | "birch-b"
+  | "piros";
+
+const fontMap = {
+  ["display-primary"]: {
+    href: "/fonts/VG_R.woff2",
+    type: "font/woff2",
+  },
+  ["body-primary"]: {
+    href: "/fonts/WS_r.ttf",
+    type: "font/ttf",
+  },
+  ["asatic-r"]: {
+    href: "/fonts/NM_R.woff2",
+    type: "font/woff2",
+  },
+  ["birch-b"]: {
+    href: "/fonts/AM-b.ttf",
+    type: "font/woff2",
+  },
+  ["alesh"]: {
+    href: "/fonts/IBMMono.woff2",
+    type: "font/woff2",
+  },
+};
+
 export interface Props {
-  pageTitle?: string;
+  preloadFonts?: FontName[];
 }
 
 declare global {
@@ -14,7 +45,7 @@ declare global {
   }
 }
 
-// const { pageTitle } = Astro.props;
+const { preloadFonts } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -22,10 +53,29 @@ declare global {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>VirtualWorks. Curated Sites.</title>
-    <link rel="stylesheet" href="https://use.typekit.net/ewe1rrd.css" />
+    {
+      preloadFonts?.map((fontName) =>
+        fontName === "piros" ? (
+          <link
+            rel="preload"
+            as="style"
+            rel="stylesheet"
+            href="https://use.typekit.net/ewe1rrd.css"
+          />
+        ) : (
+          <link
+            rel="preload"
+            href={fontMap[fontName].href}
+            as="font"
+            type={fontMap[fontName].type}
+            crossorigin
+          />
+        )
+      )
+    }
   </head>
   <body id="body" class="w-screen overflow-x-hidden">
     <Navigation />
