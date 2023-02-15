@@ -20,6 +20,8 @@ module.exports = {
       backgroundImage: {
         "work-title":
           "linear-gradient(to right, white 0%, white 60px, black 60px, black 100%)",
+        "work-title-sm":
+          "linear-gradient(to bottom, white 0%, white 25px, black 25px, black 100%)",
       },
       spacing: {
         xxxs: ".1rem",

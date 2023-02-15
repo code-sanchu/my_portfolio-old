@@ -1,6 +1,7 @@
 ---
 import { Image } from "@astrojs/image/components";
 import HorizontalScrollContainer from "~components/HorizontalScrollContainer.astro";
+import PlayIcon from "~components/icons/PlayIcon.astro";
 import TextSection from "~components/TextSection.astro";
 
 import { asaticImage } from "~images/index";
@@ -9,9 +10,10 @@ import Layout from "~layouts/Layout.astro";
 import asaticVid from "~video/asatic_cms_landing.mp4";
 ---
 
-<vid></vid>
 <Layout>
-  <div class="flex justify-center py-2xl px-2xl font-body-primary">
+  <div
+    class="flex justify-center p-xl pr-lg sm:px-lg lg:py-2xl lg:px-2xl font-body-primary"
+  >
     <div class="w-full max-w-[1600px]">
       <TextSection>
         <h1 class="font-asatic-r text-5xl">Asatic</h1>
@@ -29,7 +31,7 @@ import asaticVid from "~video/asatic_cms_landing.mp4";
       <div class="py-md">
         <HorizontalScrollContainer>
           <div
-            class="relative inline-flex justify-items-stretch gap-md h-40vh max-h-[1000px]"
+            class="relative flex justify-items-stretch gap-md h-40vh max-h-[1000px]"
           >
             <Image
               src={asaticImage.front_screenshot1}
@@ -56,9 +58,9 @@ import asaticVid from "~video/asatic_cms_landing.mp4";
         </HorizontalScrollContainer>
       </div>
       <TextSection>
-        <div class="flex gap-md">
+        <div class="flex gap-xs sm:gap-md flex-wrap">
           <h3 class="text-gray-600 uppercase">Tech</h3>
-          <div class="flex gap-sm">
+          <div class="flex flex-wrap gap-x-sm gap-y-xxs">
             <p>nextjs</p><p>react</p><p>tailwind & twin.macro</p><p>
               firebase
             </p><p>redux</p><p>typescript</p>
@@ -77,10 +79,13 @@ import asaticVid from "~video/asatic_cms_landing.mp4";
         </div>
         <div class="mt-md">
           <h3 class="uppercase text-gray-600">Customisation and ergonomics</h3>
-          <div class="aspect-video py-sm" id="video1-container">
+          <div class="relative aspect-video py-sm" id="video1-container">
             <video id="video1">
               <source src={asaticVid} />
             </video>
+            <div class="absolute left-sm top-sm w-[20px] h-[20px]">
+              <PlayIcon />
+            </div>
           </div>
           <p class="mt-xxs">
             We wanted the CMS to facilitate a non-generic site design whilst not
