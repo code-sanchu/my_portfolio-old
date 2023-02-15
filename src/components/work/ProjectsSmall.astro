@@ -6,28 +6,28 @@ import { projectIdString } from "~data/idString";
 import { projects } from "./data";
 ---
 
-<div class="pl-[30px] w-[84vw]">
+<div class="pl-[30px] w-[84vw]" id="test">
   <div
-    id={projectIdString.projectsContainer}
+    id={`${projectIdString.projectsContainer}-sm`}
     data-num-projects={projects.length}
   >
     {
       projects.map((project, i) => (
         <div
-          id={`${projectIdString.project}${i}`}
+          id={`${projectIdString.project}${i}-sm`}
           class={`${i === 0 ? "" : "hidden"}`}
         >
           <div class="">
             <div class="font-body-primary">
               <p
-                id={`${projectIdString.projectType}${i}`}
+                id={`${projectIdString.projectType}${i}-sm`}
                 class={`flex items-center gap-sm opacity-0`}
               >
                 <span>{project.description.siteType}</span>
                 <span class="w-[18px] h-[1px] block bg-black" />
               </p>
               <p
-                id={`${projectIdString.projectAbout}${i}`}
+                id={`${projectIdString.projectAbout}${i}-sm`}
                 class=" text-gray-600 opacity-0"
               >
                 {project.description.siteAbout}
@@ -37,7 +37,7 @@ import { projects } from "./data";
           <>
             <div class=" w-[210px] h-[300px] mt-sm ">
               <Image
-                id={`${projectIdString.projectImage}${i}`}
+                id={`${projectIdString.projectImage}${i}-sm`}
                 src={project.image}
                 alt=""
                 format="avif"
@@ -47,7 +47,7 @@ import { projects } from "./data";
             <div class="">
               {project.title.type === "text" ? (
                 <h2
-                  id={`${projectIdString.projectTitle}${i}`}
+                  id={`${projectIdString.projectTitle}${i}-sm`}
                   class={`text-5xl opacity-0 flex flex-col ${
                     project.id === "asatic"
                       ? "font-asatic-r"
@@ -68,7 +68,7 @@ import { projects } from "./data";
                 </h2>
               ) : (
                 <div
-                  id={`${projectIdString.projectTitle}${i}`}
+                  id={`${projectIdString.projectTitle}${i}-sm`}
                   class="w-[200px] opacity-0"
                 >
                   <Image src={project.title.url} alt="" format="avif" />
@@ -76,7 +76,7 @@ import { projects } from "./data";
               )}
             </div>
             <p
-              id={`${projectIdString.projectLink}${i}`}
+              id={`${projectIdString.projectLink}${i}-sm`}
               class={`font-body-primary mt-sm text-right opacity-0`}
             >
               <a
@@ -92,10 +92,10 @@ import { projects } from "./data";
     }
   </div>
   <div class="flex justify-between font-display-primary mt-md">
-    <button id={projectIdString.projectPrev} class="p-xs" type="button"
+    <button id={`${projectIdString.projectPrev}-sm`} class="p-xs" type="button"
       >&lt;</button
     >
-    <button id={projectIdString.projectNext} class="p-xs" type="button"
+    <button id={`${projectIdString.projectNext}-sm`} class="p-xs" type="button"
       >&gt;</button
     >
   </div>
@@ -109,7 +109,7 @@ import { projects } from "./data";
 
   function animateProjectIn({ index }: { index: number }) {
     const type = anime.timeline({
-      targets: `#${projectIdString.projectType}${index}`,
+      targets: `#${projectIdString.projectType}${index}-sm`,
       easing: "spring(6, 70, 80, 4)",
     });
     type.add({
@@ -118,7 +118,7 @@ import { projects } from "./data";
     });
 
     const about = anime.timeline({
-      targets: `#${projectIdString.projectAbout}${index}`,
+      targets: `#${projectIdString.projectAbout}${index}-sm`,
       easing: "spring(6, 70, 80, 4)",
     });
     about.add({
@@ -129,7 +129,7 @@ import { projects } from "./data";
 
     const title = anime.timeline({
       delay: 200,
-      targets: `#${projectIdString.projectTitle}${index}`,
+      targets: `#${projectIdString.projectTitle}${index}-sm`,
       easing: "spring(6, 70, 80, 4)",
     });
     title.add({
@@ -138,7 +138,7 @@ import { projects } from "./data";
     });
 
     const link = anime.timeline({
-      targets: `#${projectIdString.projectLink}${index}`,
+      targets: `#${projectIdString.projectLink}${index}-sm`,
       delay: 200,
       easing: "spring(6, 70, 80, 4)",
     });
@@ -148,7 +148,7 @@ import { projects } from "./data";
     });
 
     const image = anime.timeline({
-      targets: `#${projectIdString.projectImage}${index}`,
+      targets: `#${projectIdString.projectImage}${index}-sm`,
       easing: "spring(6, 70, 80, 3)",
     });
     image.add({
@@ -160,7 +160,7 @@ import { projects } from "./data";
 
   function animateProjectElementsOut({ index }: { index: number }) {
     const type = anime.timeline({
-      targets: `#${projectIdString.projectType}${index}`,
+      targets: `#${projectIdString.projectType}${index}-sm`,
       easing: "spring(6, 70, 80, 4)",
     });
     type.add({
@@ -172,7 +172,7 @@ import { projects } from "./data";
     });
 
     const about = anime.timeline({
-      targets: `#${projectIdString.projectAbout}${index}`,
+      targets: `#${projectIdString.projectAbout}${index}-sm`,
       easing: "spring(6, 70, 80, 4)",
       delay: 50,
     });
@@ -186,7 +186,7 @@ import { projects } from "./data";
 
     const title = anime.timeline({
       delay: 200,
-      targets: `#${projectIdString.projectTitle}${index}`,
+      targets: `#${projectIdString.projectTitle}${index}-sm`,
       easing: "spring(6, 70, 80, 4)",
     });
     title.add({
@@ -198,7 +198,7 @@ import { projects } from "./data";
     });
 
     const link = anime.timeline({
-      targets: `#${projectIdString.projectLink}${index}`,
+      targets: `#${projectIdString.projectLink}${index}-sm`,
       delay: 200,
       easing: "spring(6, 70, 80, 4)",
     });
@@ -208,7 +208,7 @@ import { projects } from "./data";
 
     const currentImage = anime.timeline({
       delay: 200,
-      targets: `#${projectIdString.projectImage}${index}`,
+      targets: `#${projectIdString.projectImage}${index}-sm`,
       easing: "spring(6, 70, 80, 3)",
     });
     currentImage.add({
@@ -227,17 +227,17 @@ import { projects } from "./data";
     currentIndex: number;
     nextIndex: number;
   }) {
-    const currentProjectId = `${projectIdString.project}${currentIndex}`;
-    const nextProjectId = `${projectIdString.project}${nextIndex}`;
+    const currentProjectId = `${projectIdString.project}${currentIndex}-sm`;
+    const nextProjectId = `${projectIdString.project}${nextIndex}-sm`;
     const currentProject = document.getElementById(currentProjectId)!;
     currentProject.style.display = "none";
     const nextProject = document.getElementById(nextProjectId)!;
-    nextProject.style.display = "flex";
+    nextProject.style.display = "block";
   }
 
   function getMaxIndex() {
     const projectsContainer = document.getElementById(
-      projectIdString.projectsContainer
+      `${projectIdString.projectsContainer}-sm`
     )!;
     const maxIndex = Number(projectsContainer.dataset.numProjects) - 1;
 
@@ -254,7 +254,6 @@ import { projects } from "./data";
     animateProjectIn({ index: 0 });
 
     const maxIndex = getMaxIndex();
-    console.log("maxIndex:", maxIndex);
 
     let currentIndex = 0;
     let nextIndex = 1;
@@ -267,7 +266,6 @@ import { projects } from "./data";
     }
 
     function showPrevProject() {
-      console.log("PREV PROJECT");
       animateProjectElementsOut({ index: currentIndex });
 
       setTimeout(() => {
@@ -282,7 +280,6 @@ import { projects } from "./data";
     }
 
     function showNextProject() {
-      console.log("NEXT PROJECT");
       animateProjectElementsOut({ index: currentIndex });
 
       setTimeout(() => {
@@ -296,16 +293,19 @@ import { projects } from "./data";
       }, 850);
     }
 
-    const prevButton = document.getElementById(projectIdString.projectPrev)!;
-    const nextButton = document.getElementById(projectIdString.projectNext)!;
+    const prevButton = document.getElementById(
+      `${projectIdString.projectPrev}-sm`
+    )!;
+    const nextButton = document.getElementById(
+      `${projectIdString.projectNext}-sm`
+    )!;
 
     prevButton.addEventListener("click", showPrevProject);
     nextButton.addEventListener("click", () => {
       showNextProject();
     });
-    // nextButton.addEventListener("click", showNextProject);
 
-    /*     const projectsContainer = document.getElementById(
+    const projectsContainer = document.getElementById(
       projectIdString.projectsContainer
     )!;
     projectsContainer.addEventListener("wheel", (event) => {
@@ -316,7 +316,7 @@ import { projects } from "./data";
       } else {
         showNextProject();
       }
-    }); */
+    });
   }
 
   main();

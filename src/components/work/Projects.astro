@@ -9,3 +9,22 @@ import ProjectsSmall from "./ProjectsSmall.astro";
 <div class="sm:hidden">
   <ProjectsSmall />
 </div>
+
+<script>
+  function main() {
+    let value = window.innerWidth;
+
+    window.addEventListener("resize", () => {
+      const updatedValue = window.innerWidth;
+
+      const resizedPastBreakpoint =
+        (value < 640 && updatedValue >= 640) ||
+        (value >= 640 && updatedValue < 640);
+
+      if (resizedPastBreakpoint) {
+        location.reload();
+      }
+    });
+  }
+  main();
+</script>
