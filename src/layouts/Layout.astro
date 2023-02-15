@@ -60,9 +60,8 @@ const { preloadFonts } = Astro.props;
       preloadFonts?.map((fontName) =>
         fontName === "piros" ? (
           <link
-            rel="preload"
+            rel="preload stylesheet"
             as="style"
-            rel="stylesheet"
             href="https://use.typekit.net/ewe1rrd.css"
           />
         ) : (
@@ -92,51 +91,56 @@ const { preloadFonts } = Astro.props;
   function handlePageChangeOnMouseWheel() {
     const body = document.getElementById("body")!;
 
-    body.addEventListener("wheel", (event) => {
-      if (window.awaitingPageChange) {
-        return;
-      }
-      const currentLocation = window.location.pathname;
+    body.addEventListener(
+      "wheel",
+      (event) => {
+        if (window.awaitingPageChange) {
+          return;
+        }
+        const currentLocation = window.location.pathname;
 
-      const isNextPage = currentLocation === "/" || currentLocation === "/work";
-      const isPrevPage =
-        currentLocation === "/work" || currentLocation === "/services";
+        const isNextPage =
+          currentLocation === "/" || currentLocation === "/work";
+        const isPrevPage =
+          currentLocation === "/work" || currentLocation === "/services";
 
-      if (!isNextPage && !isPrevPage) {
-        return;
-      }
+        if (!isNextPage && !isPrevPage) {
+          return;
+        }
 
-      if (window.isMousedOverProjects) {
-        return;
-      }
+        if (window.isMousedOverProjects) {
+          return;
+        }
 
-      const direction = event.deltaY < 0 ? "up" : "down";
+        const direction = event.deltaY < 0 ? "up" : "down";
 
-      if (isNextPage && direction === "down") {
-        window.awaitingPageChange = true;
+        if (isNextPage && direction === "down") {
+          window.awaitingPageChange = true;
 
-        const nextPageRoute = currentLocation === "/" ? "/work" : "/services";
+          const nextPageRoute = currentLocation === "/" ? "/work" : "/services";
 
-        fadePageOut();
+          fadePageOut();
 
-        setTimeout(() => {
-          window.awaitingPageChange = false;
-          window.location.href = nextPageRoute;
-        }, 450);
-      }
-      if (isPrevPage && direction === "up") {
-        window.awaitingPageChange = true;
+          setTimeout(() => {
+            window.awaitingPageChange = false;
+            window.location.href = nextPageRoute;
+          }, 450);
+        }
+        if (isPrevPage && direction === "up") {
+          window.awaitingPageChange = true;
 
-        const nextPageRoute = currentLocation === "/work" ? "/" : "/work";
+          const nextPageRoute = currentLocation === "/work" ? "/" : "/work";
 
-        fadePageOut();
+          fadePageOut();
 
-        setTimeout(() => {
-          window.awaitingPageChange = false;
-          window.location.href = nextPageRoute;
-        }, 450);
-      }
-    });
+          setTimeout(() => {
+            window.awaitingPageChange = false;
+            window.location.href = nextPageRoute;
+          }, 450);
+        }
+      },
+      { passive: true }
+    );
   }
 
   function fadePageOut() {
@@ -166,9 +170,13 @@ const { preloadFonts } = Astro.props;
     projectsContainer.addEventListener("mouseover", () => {
       window.isMousedOverProjects = true;
     });
-    projectsContainer.addEventListener("mouseleave", () => {
-      window.isMousedOverProjects = false;
-    });
+    projectsContainer.addEventListener(
+      "mouseleave",
+      () => {
+        window.isMousedOverProjects = false;
+      },
+      { passive: true }
+    );
   }
 
   const main = () => {
