@@ -1,5 +1,5 @@
 export const projectIdString = {
-  projectContainer: "projectContainer",
+  projectsContainer: "projectsContainer",
   project: "project",
   projectImage: "projectImage",
   projectType: "projectType",

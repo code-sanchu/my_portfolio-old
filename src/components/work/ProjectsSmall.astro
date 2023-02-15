@@ -1,0 +1,323 @@
+---
+import { Image } from "@astrojs/image/components";
+
+import { projectIdString } from "~data/idString";
+
+import { projects } from "./data";
+---
+
+<div class="pl-[30px] w-[84vw]">
+  <div
+    id={projectIdString.projectsContainer}
+    data-num-projects={projects.length}
+  >
+    {
+      projects.map((project, i) => (
+        <div
+          id={`${projectIdString.project}${i}`}
+          class={`${i === 0 ? "" : "hidden"}`}
+        >
+          <div class="">
+            <div class="font-body-primary">
+              <p
+                id={`${projectIdString.projectType}${i}`}
+                class={`flex items-center gap-sm opacity-0`}
+              >
+                <span>{project.description.siteType}</span>
+                <span class="w-[18px] h-[1px] block bg-black" />
+              </p>
+              <p
+                id={`${projectIdString.projectAbout}${i}`}
+                class=" text-gray-600 opacity-0"
+              >
+                {project.description.siteAbout}
+              </p>
+            </div>
+          </div>
+          <>
+            <div class=" w-[210px] h-[300px] mt-sm ">
+              <Image
+                id={`${projectIdString.projectImage}${i}`}
+                src={project.image}
+                alt=""
+                format="avif"
+                class="w-full h-full object-cover opacity-0"
+              />
+            </div>
+            <div class="">
+              {project.title.type === "text" ? (
+                <h2
+                  id={`${projectIdString.projectTitle}${i}`}
+                  class={`text-5xl opacity-0 flex flex-col ${
+                    project.id === "asatic"
+                      ? "font-asatic-r"
+                      : project.id === "alesh"
+                      ? "font-alesh tracking-wide"
+                      : project.id === "birch"
+                      ? "font-birch-b"
+                      : project.id === "piros"
+                      ? "font-piros"
+                      : ""
+                  }`}
+                >
+                  {typeof project.title.text === "string"
+                    ? project.title.text
+                    : project.title.text.map((line) => (
+                        <span class="">{line}</span>
+                      ))}
+                </h2>
+              ) : (
+                <div
+                  id={`${projectIdString.projectTitle}${i}`}
+                  class="w-[200px] opacity-0"
+                >
+                  <Image src={project.title.url} alt="" format="avif" />
+                </div>
+              )}
+            </div>
+            <p
+              id={`${projectIdString.projectLink}${i}`}
+              class={`font-body-primary mt-sm text-right opacity-0`}
+            >
+              <a
+                href={project.link.url}
+                target={project.link.type === "external" ? "_blank" : "_self"}
+              >
+                {project.link.text}
+              </a>
+            </p>
+          </>
+        </div>
+      ))
+    }
+  </div>
+  <div class="flex justify-between font-display-primary mt-md">
+    <button id={projectIdString.projectPrev} class="p-xs" type="button"
+      >&lt;</button
+    >
+    <button id={projectIdString.projectNext} class="p-xs" type="button"
+      >&gt;</button
+    >
+  </div>
+</div>
+
+<script>
+  import anime from "animejs/lib/anime.es";
+
+  import { projectIdString } from "~data/idString";
+  import { calcNextIndex, calcPrevIndex } from "~helpers/index";
+
+  function animateProjectIn({ index }: { index: number }) {
+    const type = anime.timeline({
+      targets: `#${projectIdString.projectType}${index}`,
+      easing: "spring(6, 70, 80, 4)",
+    });
+    type.add({
+      // translateY: "-20px",
+      opacity: 1,
+    });
+
+    const about = anime.timeline({
+      targets: `#${projectIdString.projectAbout}${index}`,
+      easing: "spring(6, 70, 80, 4)",
+    });
+    about.add({
+      delay: 50,
+      // translateY: "-20px",
+      opacity: 1,
+    });
+
+    const title = anime.timeline({
+      delay: 200,
+      targets: `#${projectIdString.projectTitle}${index}`,
+      easing: "spring(6, 70, 80, 4)",
+    });
+    title.add({
+      // translateY: "-20px",
+      opacity: 1,
+    });
+
+    const link = anime.timeline({
+      targets: `#${projectIdString.projectLink}${index}`,
+      delay: 200,
+      easing: "spring(6, 70, 80, 4)",
+    });
+    link.add({
+      // translateY: "-100%",
+      opacity: 1,
+    });
+
+    const image = anime.timeline({
+      targets: `#${projectIdString.projectImage}${index}`,
+      easing: "spring(6, 70, 80, 3)",
+    });
+    image.add({
+      delay: 200,
+      // translateY: "-100%",
+      opacity: 1,
+    });
+  }
+
+  function animateProjectElementsOut({ index }: { index: number }) {
+    const type = anime.timeline({
+      targets: `#${projectIdString.projectType}${index}`,
+      easing: "spring(6, 70, 80, 4)",
+    });
+    type.add({
+      // translateY: -40,
+      opacity: 0,
+    });
+    type.add({
+      // translateY: "0%",
+    });
+
+    const about = anime.timeline({
+      targets: `#${projectIdString.projectAbout}${index}`,
+      easing: "spring(6, 70, 80, 4)",
+      delay: 50,
+    });
+    about.add({
+      // translateY: -40,
+      opacity: 0,
+    });
+    about.add({
+      // translateY: "0%",
+    });
+
+    const title = anime.timeline({
+      delay: 200,
+      targets: `#${projectIdString.projectTitle}${index}`,
+      easing: "spring(6, 70, 80, 4)",
+    });
+    title.add({
+      // translateY: "-40px",
+      opacity: 0,
+    });
+    title.add({
+      // translateY: 0,
+    });
+
+    const link = anime.timeline({
+      targets: `#${projectIdString.projectLink}${index}`,
+      delay: 200,
+      easing: "spring(6, 70, 80, 4)",
+    });
+    link.add({
+      opacity: 0,
+    });
+
+    const currentImage = anime.timeline({
+      delay: 200,
+      targets: `#${projectIdString.projectImage}${index}`,
+      easing: "spring(6, 70, 80, 3)",
+    });
+    currentImage.add({
+      // translateY: "-200%",
+      opacity: 0,
+    });
+    currentImage.add({
+      translateY: "0%",
+    });
+  }
+
+  function handleProjectContainerDisplay({
+    currentIndex,
+    nextIndex,
+  }: {
+    currentIndex: number;
+    nextIndex: number;
+  }) {
+    const currentProjectId = `${projectIdString.project}${currentIndex}`;
+    const nextProjectId = `${projectIdString.project}${nextIndex}`;
+    const currentProject = document.getElementById(currentProjectId)!;
+    currentProject.style.display = "none";
+    const nextProject = document.getElementById(nextProjectId)!;
+    nextProject.style.display = "flex";
+  }
+
+  function getMaxIndex() {
+    const projectsContainer = document.getElementById(
+      projectIdString.projectsContainer
+    )!;
+    const maxIndex = Number(projectsContainer.dataset.numProjects) - 1;
+
+    return maxIndex;
+  }
+
+  function main() {
+    const windowWidth = window.innerWidth;
+
+    if (windowWidth >= 640) {
+      return;
+    }
+
+    animateProjectIn({ index: 0 });
+
+    const maxIndex = getMaxIndex();
+    console.log("maxIndex:", maxIndex);
+
+    let currentIndex = 0;
+    let nextIndex = 1;
+    let prevIndex = maxIndex;
+
+    function updateIndexState({ direction }: { direction: "prev" | "next" }) {
+      currentIndex = direction === "prev" ? prevIndex : nextIndex;
+      nextIndex = calcNextIndex({ currentIndex, maxIndex });
+      prevIndex = calcPrevIndex({ currentIndex, maxIndex });
+    }
+
+    function showPrevProject() {
+      console.log("PREV PROJECT");
+      animateProjectElementsOut({ index: currentIndex });
+
+      setTimeout(() => {
+        handleProjectContainerDisplay({ currentIndex, nextIndex: prevIndex });
+      }, 800);
+
+      setTimeout(() => {
+        animateProjectIn({ index: prevIndex });
+
+        updateIndexState({ direction: "prev" });
+      }, 850);
+    }
+
+    function showNextProject() {
+      console.log("NEXT PROJECT");
+      animateProjectElementsOut({ index: currentIndex });
+
+      setTimeout(() => {
+        handleProjectContainerDisplay({ currentIndex, nextIndex: nextIndex });
+      }, 800);
+
+      setTimeout(() => {
+        animateProjectIn({ index: nextIndex });
+
+        updateIndexState({ direction: "next" });
+      }, 850);
+    }
+
+    const prevButton = document.getElementById(projectIdString.projectPrev)!;
+    const nextButton = document.getElementById(projectIdString.projectNext)!;
+
+    prevButton.addEventListener("click", showPrevProject);
+    nextButton.addEventListener("click", () => {
+      showNextProject();
+    });
+    // nextButton.addEventListener("click", showNextProject);
+
+    /*     const projectsContainer = document.getElementById(
+      projectIdString.projectsContainer
+    )!;
+    projectsContainer.addEventListener("wheel", (event) => {
+      const direction = event.deltaY < 0 ? "prev" : "next";
+
+      if (direction === "prev") {
+        showPrevProject();
+      } else {
+        showNextProject();
+      }
+    }); */
+  }
+
+  main();
+</script>

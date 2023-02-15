@@ -8,7 +8,7 @@ export const projects: Project[] = [
     title: { type: "text", text: ["Alesh", "Compton"] },
     image: sliderImage.alesh,
     description: {
-      siteAbout: "Video artist and photographer portfolio",
+      siteAbout: "Video artist and photographer",
       siteType: "website",
     },
     link: {
