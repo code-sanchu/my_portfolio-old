@@ -94,21 +94,26 @@ const { preloadFonts } = Astro.props;
     body.addEventListener(
       "wheel",
       (event) => {
-        if (window.awaitingPageChange) {
+        if (window.awaitingPageChange === true) {
           return;
         }
         const currentLocation = window.location.pathname;
 
         const isNextPage =
-          currentLocation === "/" || currentLocation === "/work";
+          currentLocation === "/" ||
+          currentLocation === "/work" ||
+          currentLocation === "/work/";
         const isPrevPage =
-          currentLocation === "/work" || currentLocation === "/services";
+          currentLocation === "/work" ||
+          currentLocation === "/work/" ||
+          currentLocation === "/services" ||
+          currentLocation === "/services/";
 
         if (!isNextPage && !isPrevPage) {
           return;
         }
 
-        if (window.isMousedOverProjects) {
+        if (window.isMousedOverProjects === true) {
           return;
         }
 
@@ -167,9 +172,13 @@ const { preloadFonts } = Astro.props;
       return;
     }
 
-    projectsContainer.addEventListener("mouseover", () => {
-      window.isMousedOverProjects = true;
-    });
+    projectsContainer.addEventListener(
+      "mouseover",
+      () => {
+        window.isMousedOverProjects = true;
+      },
+      { passive: true }
+    );
     projectsContainer.addEventListener(
       "mouseleave",
       () => {
