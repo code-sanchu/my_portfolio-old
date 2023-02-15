@@ -158,7 +158,10 @@ const { preloadFonts } = Astro.props;
   function trackProjectsContainerIsMousedOverOnWorkPage() {
     const currentLocation = window.location.pathname;
 
-    if (currentLocation !== "/work") {
+    const isWorkPage =
+      currentLocation === "/work" || currentLocation === "/work/";
+
+    if (isWorkPage) {
       return;
     }
 
