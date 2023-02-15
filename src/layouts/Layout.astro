@@ -99,15 +99,13 @@ const { preloadFonts } = Astro.props;
         }
         const currentLocation = window.location.pathname;
 
-        const isNextPage =
-          currentLocation === "/" ||
-          currentLocation === "/work" ||
-          currentLocation === "/work/";
-        const isPrevPage =
-          currentLocation === "/work" ||
-          currentLocation === "/work/" ||
-          currentLocation === "/services" ||
-          currentLocation === "/services/";
+        const isWorkPage =
+          currentLocation === "/work" || currentLocation === "/work/";
+        const isServicesPage =
+          currentLocation === "/services" || currentLocation === "/services/";
+
+        const isNextPage = currentLocation === "/" || isWorkPage;
+        const isPrevPage = isWorkPage || isServicesPage;
 
         if (!isNextPage && !isPrevPage) {
           return;
@@ -134,7 +132,7 @@ const { preloadFonts } = Astro.props;
         if (isPrevPage && direction === "up") {
           window.awaitingPageChange = true;
 
-          const nextPageRoute = currentLocation === "/work" ? "/" : "/work";
+          const nextPageRoute = isWorkPage ? "/" : "/work";
 
           fadePageOut();
 
