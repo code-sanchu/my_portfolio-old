@@ -35,7 +35,7 @@ import { projects } from "./data";
             </div>
           </div>
           <>
-            <div class=" w-[210px] h-[300px] mt-sm ">
+            <div class=" w-[189px] h-[270px] mt-sm ">
               <Image
                 id={`${projectIdString.projectImage}${i}-sm`}
                 src={project.image}
@@ -93,7 +93,9 @@ import { projects } from "./data";
       ))
     }
   </div>
-  <div class="flex justify-between font-display-primary mt-md">
+  <div
+    class="flex justify-between font-display-primary mt-md -translate-y-[25px]"
+  >
     <button id={`${projectIdString.projectPrev}-sm`} class="p-xs" type="button"
       >&lt;</button
     >
