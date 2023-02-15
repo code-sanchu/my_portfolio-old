@@ -161,17 +161,13 @@ const { preloadFonts } = Astro.props;
     const isWorkPage =
       currentLocation === "/work" || currentLocation === "/work/";
 
-    if (isWorkPage) {
+    if (!isWorkPage) {
       return;
     }
 
     const projectsContainer = document.getElementById(
       projectIdString.projectsContainer
-    );
-
-    if (!projectsContainer) {
-      return;
-    }
+    )!;
 
     projectsContainer.addEventListener(
       "mouseover",
