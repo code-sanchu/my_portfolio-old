@@ -15,7 +15,7 @@ import { projects } from "./data";
       projects.map((project, i) => (
         <div
           id={`${projectIdString.project}${i}-sm`}
-          class={`${i === 0 ? "" : "hidden"}`}
+          class={` ${i === 0 ? "" : "hidden"}`}
         >
           <div class="">
             <div class="font-body-primary">
@@ -44,11 +44,11 @@ import { projects } from "./data";
                 class="w-full h-full object-cover opacity-0"
               />
             </div>
-            <div class="-translate-y-[25px]">
+            <div class="">
               {project.title.type === "text" ? (
                 <h2
                   id={`${projectIdString.projectTitle}${i}-sm`}
-                  class={`text-5xl opacity-0 flex flex-col bg-work-title-sm bg-clip-text text-transparent  ${
+                  class={`text-5xl opacity-0 flex flex-col ${
                     project.id === "asatic"
                       ? "font-asatic-r"
                       : project.id === "alesh"
@@ -75,7 +75,7 @@ import { projects } from "./data";
                 </div>
               )}
             </div>
-            <div class="-translate-y-[25px]">
+            <div class="">
               <p
                 id={`${projectIdString.projectLink}${i}-sm`}
                 class={`font-body-primary mt-sm text-right opacity-0`}
@@ -93,9 +93,7 @@ import { projects } from "./data";
       ))
     }
   </div>
-  <div
-    class="flex justify-between font-display-primary mt-md -translate-y-[25px]"
-  >
+  <div class="flex justify-between font-display-primary mt-md">
     <button id={`${projectIdString.projectPrev}-sm`} class="p-xs" type="button"
       >&lt;</button
     >
