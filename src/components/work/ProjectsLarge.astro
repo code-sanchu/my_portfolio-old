@@ -127,7 +127,7 @@ import { projects } from "./data";
   import anime from "animejs/lib/anime.es";
 
   import { projectIdString } from "~data/idString";
-  import { calcNextIndex, calcPrevIndex } from "~helpers/index";
+  import { calcNextIndex, calcPrevIndex, debounce } from "~helpers/index";
 
   function animateProjectIn({ index }: { index: number }) {
     const type = anime.timeline({
@@ -359,15 +359,18 @@ import { projects } from "./data";
     const projectsContainer = document.getElementById(
       projectIdString.projectsContainer
     )!;
-    projectsContainer.addEventListener("wheel", (event) => {
-      const direction = event.deltaY < 0 ? "prev" : "next";
+    projectsContainer.addEventListener(
+      "wheel",
+      debounce((event) => {
+        const direction = event.deltaY < 0 ? "prev" : "next";
 
-      if (direction === "prev") {
-        showPrevProject();
-      } else {
-        showNextProject();
-      }
-    });
+        if (direction === "prev") {
+          showPrevProject();
+        } else {
+          showNextProject();
+        }
+      }, 200)
+    );
   }
 
   main();

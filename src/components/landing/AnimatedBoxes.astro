@@ -1,177 +1,180 @@
-<div
-  class="absolute left-[78%] top-[55%] w-10px w-[11px] h-[11px] bg-[#010408] opacity-0"
-  id="box1"
->
+<div class="box1"></div>
+<div class="container1">
+  <div class="box2"></div>
+  <div class="box3"></div>
+  <div class="box2"></div>
 </div>
-<div
-  class="absolute left-[25%] sm:left-[20%] top-[18%] sm:top-[23%] w-[11px] h-[11px] bg-[#0f52b2] opacity-0"
-  id="box2"
->
-</div>
-<div
-  class="absolute left-[18%] top-[16%] sm:top-[20%] w-[0px] h-[11px] bg-[#010408] opacity-0"
-  id="box3"
->
-</div>
-<div
-  class="absolute left-[22%] top-[12%] sm:top-[18%] w-[11px] h-[11px] bg-[#efcf0a] origin-top-right"
-  id="box5"
->
-</div>
-<div
-  class="absolute left-[68%] top-[16%] w-[11px] h-[11px] bg-[#36e1a8]"
-  id="box4"
->
-</div>
+<div class="box4"></div>
+<div class="box5"></div>
+<div class="box6"></div>
 
-<div
-  class="absolute left-[36%] bottom-[18%] w-[11px] h-[28px] bg-[#ecd71f]"
-  id="box6"
->
-</div>
-<div
-  class="absolute left-[16%] bottom-[34%] w-[0px] h-[11px] bg-[#c62d27]"
-  id="box7"
->
-</div>
+<style>
+  .box1 {
+    position: absolute;
+    left: 20%;
+    top: 10%;
+    width: 12px;
+    height: 65px;
+    background: #f22f2d;
+  }
+  .container1 {
+    position: absolute;
+    left: 60%;
+    top: 13%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .box2 {
+    width: 60px;
+    height: 10px;
+    background: #4a40fd;
+  }
+  .box3 {
+    width: 60px;
+    height: 10px;
+    background: #54d8be;
+    transform-origin: center right 0px;
+  }
+  .box4 {
+    position: absolute;
+    left: 15%;
+    top: 60%;
+    width: 0px;
+    height: 10px;
+    background: #44c2ff;
+  }
+  .box5 {
+    position: absolute;
+    left: 78%;
+    top: 55%;
+    width: 11px;
+    height: 20px;
+    background: #ffd753;
+  }
+  .box6 {
+    position: absolute;
+    left: 50%;
+    top: 75%;
+    width: 60px;
+    height: 11px;
+    background: #ffd753;
+  }
+</style>
 
 <script>
   import anime from "animejs/lib/anime.es";
 
   const box1 = anime.timeline({
-    targets: "#box1",
-    easing: "easeInQuad",
+    targets: ".box1",
+    easing: "cubicBezier(.5, .05, .1, .3)",
+  });
+  box1.add({
+    height: "20px",
+    translateY: "-30px",
+    duration: 600,
+  });
+  box1.add({
+    height: "60px",
+    // scaleY: "0.8",
     duration: 400,
   });
   box1.add({
-    opacity: 1,
-    translateY: 6,
+    delay: 2000,
+    height: "0px",
+    duration: 400,
   });
   box1.add({
-    translateY: -8,
-    width: 30,
-  });
-  box1.add({
-    delay: 600,
-    width: 11,
-  });
-  box1.add({
-    height: 30,
+    height: "12px",
+    width: "60px",
+    duration: 400,
+    backgroundColor: "#FFD753",
   });
 
   const box2 = anime.timeline({
-    targets: "#box2",
-    delay: 200,
+    targets: ".box2",
+    easing: "cubicBezier(.5, .05, .1, .3)",
   });
   box2.add({
-    opacity: 1,
-    easing: "easeInQuad",
-    duration: 200,
+    width: "0px",
+    duration: 600,
   });
   box2.add({
-    easing: "easeInQuad",
-    duration: 400,
-    width: 20,
-    height: 35,
-    backgroundColor: "#e3eadd",
+    width: "60px",
+    duration: 600,
+  });
+  box2.add({
+    delay: 1500,
+    scaleX: 0.4,
+    duration: 600,
+    backgroundColor: "#54D8BE",
   });
 
   const box3 = anime.timeline({
-    targets: "#box3",
-    delay: 250,
+    targets: ".box3",
+    easing: "cubicBezier(.5, .05, .1, .3)",
   });
   box3.add({
-    opacity: 1,
-    easing: "easeInQuad",
-    duration: 200,
+    scaleX: 0,
+    duration: 600,
   });
   box3.add({
-    easing: "easeInQuad",
-    duration: 400,
-    width: 30,
-    backgroundColor: "#010408",
+    scaleX: 1,
+    duration: 600,
+  });
+  box3.add({
+    delay: 1500,
+    duration: 600,
+    backgroundColor: "#4a40fd",
   });
 
   const box4 = anime.timeline({
-    targets: "#box4",
-    delay: 150,
+    targets: ".box4",
+    easing: "cubicBezier(.5, .05, .1, .3)",
   });
   box4.add({
-    opacity: 0,
-    easing: "easeInQuad",
-    duration: 500,
-  });
-  box4.add({
-    easing: "easeInQuad",
-    delay: 600,
+    width: "65px",
     duration: 600,
-    opacity: 1,
   });
   box4.add({
-    easing: "easeInQuad",
-    delay: 300,
-    duration: 300,
-    width: 30,
+    delay: 1400,
+    width: 0,
+    duration: 600,
+    backgroundColor: "white",
   });
 
   const box5 = anime.timeline({
-    targets: "#box5",
-    // delay: 250,
+    targets: ".box5",
+    easing: "cubicBezier(.5, .05, .1, .3)",
   });
   box5.add({
-    opacity: 0,
-    easing: "easeInQuad",
-    duration: 400,
+    translateY: 20,
+    width: 11,
+    duration: 600,
   });
   box5.add({
-    easing: "easeInQuad",
-    delay: 400,
-    duration: 300,
-    opacity: 1,
-  });
-  box5.add({
-    easing: "easeInQuad",
-    delay: 200,
-    duration: 300,
-    scaleX: 3,
+    delay: 800,
+    translateY: -20,
+    height: "11px",
+    width: 50,
+    duration: 500,
+    backgroundColor: "#F22F2D",
   });
 
   const box6 = anime.timeline({
-    targets: "#box6",
-    duration: 400,
+    targets: ".box6",
     easing: "cubicBezier(.5, .05, .1, .3)",
   });
   box6.add({
-    height: 40,
-  });
-  box6.add({
-    opacity: 1,
-    height: 10,
-  });
-  box6.add({
-    height: 32,
-  });
-  box6.add({
-    delay: 600,
+    backgroundColor: "#000000",
+    width: 11,
     height: 11,
   });
   box6.add({
-    scaleX: 4,
-  });
-
-  const box7 = anime.timeline({
-    targets: "#box7",
-    duration: 400,
-    easing: "cubicBezier(.5, .05, .1, .3)",
-  });
-  box7.add({
-    opacity: 1,
-    width: 24,
-  });
-  box7.add({
-    scaleX: 1,
-  });
-  box7.add({
-    scaleX: 3,
+    delay: 1600,
+    width: 11,
+    height: "65px",
+    duration: 600,
+    backgroundColor: "#44C2FF",
   });
 </script>
