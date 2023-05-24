@@ -11,15 +11,23 @@
     "astro": "astro"
   },
   "dependencies": {
-    "sharp": "^0.31.3",
     "@astrojs/image": "^0.14.0",
+    "@astrojs/react": "^2.2.0",
     "@astrojs/tailwind": "^3.0.1",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
     "animejs": "^3.2.1",
     "astro": "^2.0.4",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-syntax-highlighter": "^15.5.0",
+    "sharp": "^0.31.3",
     "tailwindcss": "^3.0.24"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
     "@types/animejs": "^3.1.7",
+    "@types/react-syntax-highlighter": "^15.5.6",
     "prettier-plugin-astro": "^0.8.0"
   }
 }

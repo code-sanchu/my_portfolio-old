@@ -1,0 +1,67 @@
+---
+import {
+  MessyComponent,
+  MessyComponentInvoked,
+} from "~components/blog/MessyCode";
+import SampleForm from "~components/blog/SampleForm.astro";
+import Layout from "~layouts/Layout.astro";
+---
+
+<Layout>
+  <main class="grid place-items-center pt-3xl">
+    <div class="prose">
+      <header>
+        <h1 class="">Compound components in React</h1>
+        <p class="text-lg text-gray-500">A side by side comparison</p>
+      </header>
+      <div>
+        <p>
+          Compound components can clean up code considerably, reduce complexity,
+          allow for greater flexibility. They reduce the need for props and
+          collocate props to the part of a compound they're used.
+        </p>
+        <div>
+          <p>
+            Consider the following use case. It's a relatively simple form with
+            a single input that receives and validates a text string, in this
+            case a youtube url. There will also a bit of styling that I like to
+            do to animate the active and inactive states of the input, so there
+            will be some extra divs. We need it to be an abstraction. For
+            brevity, I haven't explained what each part of the code does. A form
+            such as this can quickly become messy and complex if props and UI
+            are all dumped into one component.
+          </p>
+          <div class="p-lg shadow-xl rounded-md">
+            <SampleForm />
+          </div>
+        </div>
+      </div>
+      <div class="mt-xl">
+        <h4>The default way</h4>
+        <div>
+          <p>
+            Building up an abstract component from 0 and adding more features we
+            can get something like the following:
+          </p>
+          <MessyComponent />
+          <p>
+            The above code could certainly be cleaned up in its own right. It
+            could be broken up into smaller components. Abstractions could be
+            made. State, i.e. inputValue, could be lifted so it needn't be
+            passed to children. It contains at least one bug.
+          </p>
+          <ul>
+            Some of the things that stand out to me:
+            <li>
+              The names get longer and harder to read and less clear in what
+              they're doing
+            </li>
+            <li>It's hard to know what the purpose of each div is</li>
+          </ul>
+          <p>And when the component is actually used, it gets no better:</p>
+          <MessyComponentInvoked />
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

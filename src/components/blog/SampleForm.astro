@@ -1,0 +1,25 @@
+---
+import Help from "./Help.astro";
+import InvalidInputMessage from "./InvalidInputMessage.astro";
+---
+
+<form>
+  <div class="min-w-[250px] max-w-[400px] rounded-md">
+    <h4 class="mb-xs text-sm text-gray-500 font-normal">I am a form title</h4>
+    <div class={`relative rounded-sm border bg-gray-50 py-1 pr-sm`}>
+      <div class={``}>
+        <input
+          class="w-full bg-transparent text-sm pl-xs"
+          placeholder="Youtube url"
+          type="text"
+        />
+      </div>
+      <Help />
+    </div>
+    <InvalidInputMessage />
+    <div class="mt-4 flex items-center justify-between pb-4">
+      <button class="my-btn my-btn-neutral" type="button"> Cancel</button>
+      <button class={`my-btn my-btn-action`} type="submit"> Submit</button>
+    </div>
+  </div>
+</form>

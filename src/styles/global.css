@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* see tailwind config for how fonts used */
 @font-face {
   font-family: "VG";
@@ -56,4 +60,31 @@ html::-webkit-scrollbar-thumb {
 }
 html::-webkit-scrollbar-thumb:hover {
   background: rgb(156 163 175);
+}
+
+@layer base {
+  button,
+  input,
+  textarea {
+    @apply outline-none focus:outline-none;
+  }
+}
+
+@layer components {
+  .my-btn {
+    @apply rounded-md border py-xxs px-[0.75rem] text-sm capitalize transition-colors duration-75 ease-in-out;
+  }
+  .my-btn-neutral {
+    @apply border-gray-300 hover:bg-gray-200 border text-gray-500;
+  }
+  .my-btn-action {
+    @apply bg-blue-500 text-white hover:bg-blue-700;
+  }
+
+  .my-hover-bg {
+    @apply hover:bg-gray-300 transition-colors duration-75 ease-in-out;
+  }
+  /*   .my-group-hover-child-opacity {
+    @apply opacity-0 transition-opacity duration-75 ease-in-out group-hover:opacity-100;
+  } */
 }
