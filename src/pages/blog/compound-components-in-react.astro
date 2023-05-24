@@ -50,17 +50,30 @@ import Layout from "~layouts/Layout.astro";
             made. State, i.e. inputValue, could be lifted so it needn't be
             passed to children. It contains at least one bug.
           </p>
+          <p>Some of the things that stand out to me:</p>
           <ul>
-            Some of the things that stand out to me:
             <li>
               The names get longer and harder to read and less clear in what
-              they're doing
+              they're doing.
             </li>
-            <li>It's hard to know what the purpose of each div is</li>
+            <li>It's hard to know what the purpose of each div is.</li>
           </ul>
-          <p>And when the component is actually used, it gets no better:</p>
+          <p>
+            And when the component is actually used, even with just placeholder
+            arguments, it gets no better:
+          </p>
+          {
+            /* Need to add mutation status overlay? Might not be necessary - point already well made */
+          }
           <MessyComponentInvoked />
+          <p>
+            If I were to use this component as is, I feel like I put in the
+            values and do a hail-mary. It's not sane code to me.
+          </p>
         </div>
+      </div>
+      <div class="mt-xl">
+        <h4>Compound components</h4>
       </div>
     </div>
   </main>
