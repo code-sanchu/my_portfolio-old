@@ -287,7 +287,7 @@ MyForm.Controls = FormControls;
 export const clean_component_used = `
 <MyForm
   onSubmit={(inputValue, resetForm) =>
-    ifAdmin(() => handleSubmit({ closeForm, inputValue, resetForm }))
+    ifAdmin(() => handleSubmit({ inputValue, resetForm }))
   }
 >
   {({ inputValue }) => {

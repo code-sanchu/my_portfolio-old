@@ -44,7 +44,7 @@ import Layout from "~layouts/Layout.astro";
             Building up an abstract component from 0 and adding more features we
             can get something like the following:
           </p>
-          <MessyComponent />
+          <MessyComponent client:only="react" />
           <p>
             The above code certainly needs to be cleaned up, with or without
             compound components. It contains at least one bug.
@@ -53,7 +53,7 @@ import Layout from "~layouts/Layout.astro";
             When the component is actually used, even with just placeholder
             arguments, it gets no better:
           </p>
-          <MessyComponentInvoked />
+          <MessyComponentInvoked client:only="react" />
           <p>
             If I were to use this component as is, I feel like I put in the
             values and do a hail-mary. It's not sane code to me.
@@ -66,10 +66,10 @@ import Layout from "~layouts/Layout.astro";
           Let's break this up into a compound component. Compound components
           often work well with Context, so that's what will use here.
         </p>
-        <CleanContext />
-        <CleanComponent />
+        <CleanContext client:only="react" />
+        <CleanComponent client:only="react" />
         <p>More lines, yes, but it comes into its own when using it.</p>
-        <CleanComponentUsed />
+        <CleanComponentUsed client:only="react" />
         <p>
           When used, the worth of the abstraction and the naming that comes with
           compound components becomes clear. <span class="italic">
