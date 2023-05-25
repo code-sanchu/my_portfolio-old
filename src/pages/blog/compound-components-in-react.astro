@@ -1,39 +1,40 @@
 ---
 import {
+  CleanComponent,
+  CleanComponentUsed,
+  CleanContext,
   MessyComponent,
   MessyComponentInvoked,
-} from "~components/blog/MessyCode";
+} from "~components/blog/ReactCode";
 import SampleForm from "~components/blog/SampleForm.astro";
 import Layout from "~layouts/Layout.astro";
 ---
 
 <Layout>
-  <main class="grid place-items-center pt-3xl">
+  <main class="grid place-items-center pt-3xl pb-3xl">
     <div class="prose">
       <header>
-        <h1 class="">Compound components in React</h1>
-        <p class="text-lg text-gray-500">A side by side comparison</p>
+        <h1 class="">Refactoring using compound components in React</h1>
       </header>
       <div>
         <p>
-          Compound components can clean up code considerably, reduce complexity,
-          allow for greater flexibility. They reduce the need for props and
-          collocate props to the part of a compound they're used.
+          Consider the following case. It's an abstract component of a
+          relatively simple form with a single input that receives and validates
+          a text string, in this case a youtube url. A form such as this can
+          quickly become messy and complex if props and UI are all dumped into
+          one component.
+          <br />
+          <span class="italic text-gray-500">
+            There will be a bit of styling that I like to do to animate the
+            active and inactive states of the input, so there will be some extra
+            divs. For brevity, I won't explain what each part of the code does.
+            I haven't stripped out the component to its bare bones, e.g. removed
+            styling, because it gives a better sense of the need for
+            refactoring.
+          </span>
         </p>
-        <div>
-          <p>
-            Consider the following use case. It's a relatively simple form with
-            a single input that receives and validates a text string, in this
-            case a youtube url. There will also a bit of styling that I like to
-            do to animate the active and inactive states of the input, so there
-            will be some extra divs. We need it to be an abstraction. For
-            brevity, I haven't explained what each part of the code does. A form
-            such as this can quickly become messy and complex if props and UI
-            are all dumped into one component.
-          </p>
-          <div class="p-lg shadow-xl rounded-md">
-            <SampleForm />
-          </div>
+        <div class="p-lg shadow-xl rounded-md">
+          <SampleForm />
         </div>
       </div>
       <div class="mt-xl">
@@ -45,26 +46,13 @@ import Layout from "~layouts/Layout.astro";
           </p>
           <MessyComponent />
           <p>
-            The above code could certainly be cleaned up in its own right. It
-            could be broken up into smaller components. Abstractions could be
-            made. State, i.e. inputValue, could be lifted so it needn't be
-            passed to children. It contains at least one bug.
+            The above code certainly needs to be cleaned up, with or without
+            compound components. It contains at least one bug.
           </p>
-          <p>Some of the things that stand out to me:</p>
-          <ul>
-            <li>
-              The names get longer and harder to read and less clear in what
-              they're doing.
-            </li>
-            <li>It's hard to know what the purpose of each div is.</li>
-          </ul>
           <p>
-            And when the component is actually used, even with just placeholder
+            When the component is actually used, even with just placeholder
             arguments, it gets no better:
           </p>
-          {
-            /* Need to add mutation status overlay? Might not be necessary - point already well made */
-          }
           <MessyComponentInvoked />
           <p>
             If I were to use this component as is, I feel like I put in the
@@ -74,6 +62,35 @@ import Layout from "~layouts/Layout.astro";
       </div>
       <div class="mt-xl">
         <h4>Compound components</h4>
+        <p>
+          Let's break this up into a compound component. Compound components
+          often work well with Context, so that's what will use here.
+        </p>
+        <CleanContext />
+        <CleanComponent />
+        <p>More lines, yes, but it comes into its own when using it.</p>
+        <CleanComponentUsed />
+        <p>
+          When used, the worth of the abstraction and the naming that comes with
+          compound components becomes clear. <span class="italic">
+            The only difference between a compound component and the same
+            component (as it is - broken up into chunks), is the naming</span
+          >. It's clear what each prop does without having to read the
+          component's code. I can use each part with confidence. With the
+          abstraction, I can now add extra components, such as YoutubeURLHelp,
+          without adding another prop. I can also make the form's value
+          available to all children, without having to pass it into each prop. I
+          can choose which part of the component to use without adding more
+          props and conditional rendering.
+        </p>
+      </div>
+      <div>
+        <h4>Conclusions</h4>
+        <p>
+          This was a great use case for abstraction and compound components.
+          However, abstraction, and particularly compound components, do make
+          our code bulkier and shouldn't be used unless complexity demands it.
+        </p>
       </div>
     </div>
   </main>
