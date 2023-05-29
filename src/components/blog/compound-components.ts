@@ -98,13 +98,25 @@ export const messy_component_code = `const MyForm = ({
 
 export const messy_use_code = `
   <MyForm
-    mutationStatusOverlay={<></>}
+    mutationStatusOverlay={
+      <MutationStatusOverlay
+        status={addVideoMutation.status}
+        text={{
+         creating: "Adding video",
+         error: "Error creating video",
+         success: "Video created",
+        }}
+      />
+    }
     onCancelButtonClick={() => null}
     onSubmit={(inputValue, resetForm) => null}
     submitIsDisabled={(inputValue) => false}
     text={{ placeholder: "hello", title: "very messy" }}
     computeIsInputError={(inputValue) => true}
-    elements={{ input: <></>, inputMessage: <></> }}
+    elements={{ 
+      input: <YoutubeURLHelp />,
+      inputMessage: <InvalidInputMessage />
+    }}
   />
 `;
 

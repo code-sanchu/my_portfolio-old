@@ -18,20 +18,12 @@ import Layout from "~layouts/Layout.astro";
       </header>
       <div>
         <p>
-          Consider the following case. It's an abstract component of a
-          relatively simple form with a single input that receives and validates
-          a text string, in this case a youtube url. A form such as this can
-          quickly become messy and complex if props and UI are all dumped into
-          one component.
-          <br />
-          <span class="italic text-gray-500">
-            There will be a bit of styling that I like to do to animate the
-            active and inactive states of the input, so there will be some extra
-            divs. For brevity, I won't explain what each part of the code does.
-            I haven't stripped out the component to its bare bones, e.g. removed
-            styling, because it gives a better sense of the need for
-            refactoring.
-          </span>
+          Consider the following case: an abstract component of a relatively
+          simple form with a single text input that is validated.
+        </p>
+        <p>
+          A form such as this can quickly become messy and complex if props and
+          UI are all dumped into one component.
         </p>
         <div class="p-lg shadow-xl rounded-md">
           <SampleForm />
@@ -42,7 +34,22 @@ import Layout from "~layouts/Layout.astro";
         <div>
           <p>
             Building up an abstract component from 0 and adding more features we
-            can get something like the following:
+            can get something like the below. Yes, this is a mess, but please
+            bare with me.
+          </p>
+          <p class="italic text-gray-500">
+            Note:
+            <ul class="italic text-gray-500">
+              <li>
+                There's additional styling I've kept in to give a sense of the
+                real need for refactoring.
+              </li>
+              <li>
+                I haven't explained what each part does but hopefully it's
+                implicit.
+              </li>
+              <li>I'm using Typescript and tailwind.</li>
+            </ul>
           </p>
           <MessyComponent client:only="react" />
           <p>
@@ -50,42 +57,64 @@ import Layout from "~layouts/Layout.astro";
             or without compound components. It contains at least one bug.
           </p>
           <p>
-            When the component is actually used, even with just placeholder
+            When the component is actually used, even with some placeholder
             arguments, it gets no better:
           </p>
           <MessyComponentInvoked client:only="react" />
           <p>
-            If I were to use this component as is, I feel like I put in the
-            values and do a hail-mary. It's not sane code to me.
+            If I were to use this component as is, I feel like I pass in the
+            values and do a hail-mary.
           </p>
         </div>
       </div>
       <div class="mt-xl">
-        <h4>Compound components</h4>
+        <h4>Refactoring into a compound component</h4>
         <p>
-          Let's break this up into a compound component. Compound components
-          often work well with Context, so that's what will use here.
+          I'll break this up into a compound component. Compound components
+          often work well with Context, so that's what I'll use here.
         </p>
         <CleanContext client:only="react" />
         <CleanComponent client:only="react" />
         <p>More lines, yes, but it comes into its own when using it.</p>
         <CleanComponentUsed client:only="react" />
         <p>
+          <ul class="text-gray-500 italic">
+            <li>
+              Note: this isn't quite a step-by-step guide but more of a showcase
+              of compound components. The reasoning for each part of the
+              refactor should be derivable by intermediate developers.
+            </li>
+            <li>
+              The only difference between a compound component and the same
+              component (as it is - broken up into chunks), is the '.' naming.
+            </li>
+          </ul>
+        </p>
+        <p>
           When used, the worth of the abstraction and the naming that comes with
-          compound components becomes clear. <span class="italic">
-            The only difference between a compound component and the same
-            component (as it is - broken up into chunks), is the naming</span
-          >. It's clear what each prop does without having to read the
-          component's code. I can use each part with confidence. With the
-          abstraction, I can now add extra components, such as YoutubeURLHelp,
-          without adding another prop. I can also make the form's value
-          available to all children, without having to pass it into each prop. I
-          can choose which part of the component to use without adding more
-          props and conditional rendering.
+          compound components becomes clear.
+          <ul>
+            <li>
+              It's clear what each prop does without having to read the
+              component's code.
+            </li>
+            <li>
+              I can now add extra components, such as YoutubeURLHelp, without
+              adding another prop.
+            </li>
+            <li>
+              I can make the form's value available to all children, without
+              having to pass it into each prop.
+            </li>
+            <li>
+              I can choose which part of the component to use without adding
+              more props and conditional rendering.
+            </li>
+          </ul>
         </p>
       </div>
       <div>
-        <h4>Conclusions</h4>
+        <h4>Conclusion</h4>
         <p>
           This was a great use case for abstraction and compound components.
           However, abstraction, and particularly compound components, do make
