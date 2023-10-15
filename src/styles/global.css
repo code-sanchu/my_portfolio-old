@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 /* see tailwind config for how fonts used */
+
+@font-face {
+  font-family: "TiltNeon";
+  src: url("/fonts/TiltNeon-Regular.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+}
 @font-face {
   font-family: "VG";
   src: url("/fonts/VG_R.woff2") format("woff2");

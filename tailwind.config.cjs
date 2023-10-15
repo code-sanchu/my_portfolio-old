@@ -3,8 +3,8 @@ module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     fontFamily: {
-      "display-primary": ["VG", "sans-serif"],
-      "body-primary": ["WS_r", "sans-serif"],
+      "display-primary": ["TiltNeon", "sans-serif"],
+      "body-primary": ["TiltNeon", "sans-serif"],
       "asatic-r": ["NM_R", "sans-serif"],
       alesh: ["IBMMono", "monospace"],
       "birch-b": ["Amatic-b", "cursive"],

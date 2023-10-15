@@ -13,11 +13,12 @@ type FontName =
 
 const fontMap = {
   ["display-primary"]: {
-    href: "/fonts/VG_R.woff2",
-    type: "font/woff2",
+    href: "/fonts/TiltNeon-Regular.ttf",
+    type: "font/ttf",
   },
   ["body-primary"]: {
-    href: "/fonts/WS_r.ttf",
+    // href: "/fonts/WS_r.ttf",
+    href: "/fonts/TiltNeon-Regular.ttf",
     type: "font/ttf",
   },
   ["asatic-r"]: {
@@ -55,7 +56,7 @@ const { preloadFonts } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>VirtualWorks. Curated Sites.</title>
+    <title>VirtualWorks. Custom Sites.</title>
     {
       preloadFonts?.map((fontName) =>
         fontName === "piros" ? (
